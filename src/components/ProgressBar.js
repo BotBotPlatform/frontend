@@ -6,7 +6,7 @@ export class ProgressBar extends Component {
 		super(props);
 
 		this.state = {
-			progress: 25
+			progress: this.props.progress
 		};
 	}
 	updateProgress(p) {
