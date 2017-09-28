@@ -1,0 +1,50 @@
+#registration {
+	display: flex;
+  	align-items: center;
+    justify-content: center;
+  	height: 100%;
+    padding: 0;
+    margin: 0;
+    .row {
+    	width: 35%;
+    	margin: 0 auto;
+    }
+    img {
+    	width: 100%;
+    }
+
+    form {
+    	width: 100%;
+    	padding-top: 1em;
+    	input {
+    		width: 100%;
+    		&.email-input, &.password-input{
+    			color: #ACACAC;
+    			border: 0;
+    			border-bottom: 3px solid #E7E7E7;
+    			font-family: 'Fira Sans', sans-serif;
+    			padding: 0.75em 0;
+    			font-size: 1em;
+    			margin-bottom: 1.2em;
+    			font-weight: 300;
+    			&::placeholder {
+    				color: #D5D5D5;
+    			}
+    		}
+    		&:focus {
+    			outline: 0;
+    		}
+    		&.submit-button {
+    			border: 0;
+    			padding: 1.5em 0;
+    			color: #FBFEFF;
+    			margin-top: 1.75em;
+    			font-size: 1em;
+    			font-weight: 500;
+    			background: linear-gradient(90deg, #7FFEE8, #8DC9FF);
+    			border-radius: 5em;
+    		}
+    	}
+    }
+
+}

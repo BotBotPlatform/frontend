@@ -2,7 +2,9 @@
 	width: 100%;
 	height: 4px;
 	margin: 0;
+	position: absolute;
 	display: flex;
+	top: 0;
 
 	& .progress {
 		background: linear-gradient(90deg, #7FFEE8, #8DC9FF);
