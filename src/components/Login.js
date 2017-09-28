@@ -1,11 +1,33 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import ProgressBar from './ProgressBar';
+import { connect } from 'react-redux';
+import { loginFromJWT } from '../actions/users';
 
-const Login = () => (
-  <div>
-    <ProgressBar progress='80' />
-  </div>
-)
+export class Login extends Component {
+	constructor (props) {
+        super(props);
+        this.state = { redirectToReferrer: false };
+    }
+    
+	render () {
+		return (
+			<div>
+			  <ProgressBar progress='80' />
+			</div>
+		);
+	}
+}
 
-export default Login;
+function mapStateToProps (state) {
+    return {
+        user: state.user
+    };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+	loginFromJWT: (token) => {
+	        dispatch(loginFromJWT(token));
+	}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

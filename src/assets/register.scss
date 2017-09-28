@@ -19,21 +19,24 @@
     	input {
     		width: 100%;
     		&.email-input, &.password-input{
-    			color: #ACACAC;
+    			color: #D5D5D5;
     			border: 0;
     			border-bottom: 3px solid #E7E7E7;
     			font-family: 'Fira Sans', sans-serif;
     			padding: 0.75em 0;
     			font-size: 1em;
     			margin-bottom: 1.2em;
-    			font-weight: 300;
+    			font-weight: 400;
     			&::placeholder {
     				color: #D5D5D5;
+    				font-weight: 300;
     			}
     		}
     		&:focus {
     			outline: 0;
+    			color: #ACACAC;
     		}
+    		
     		&.submit-button {
     			border: 0;
     			padding: 1.5em 0;
