@@ -1,21 +1,21 @@
-#registration {
+#registration, #login {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   padding: 0;
   margin: 0; }
-  #registration .row {
+  #registration .row, #login .row {
     width: 35%;
     margin: 0 auto; }
-  #registration img {
+  #registration img, #login img {
     width: 100%; }
-  #registration form {
+  #registration form, #login form {
     width: 100%;
     padding-top: 1em; }
-    #registration form input {
+    #registration form input, #login form input {
       width: 100%; }
-      #registration form input.email-input, #registration form input.password-input {
+      #registration form input.email-input, #registration form input.password-input, #login form input.email-input, #login form input.password-input {
         color: #D5D5D5;
         border: 0;
         border-bottom: 3px solid #E7E7E7;
@@ -24,13 +24,13 @@
         font-size: 1em;
         margin-bottom: 1.2em;
         font-weight: 400; }
-        #registration form input.email-input::placeholder, #registration form input.password-input::placeholder {
+        #registration form input.email-input::placeholder, #registration form input.password-input::placeholder, #login form input.email-input::placeholder, #login form input.password-input::placeholder {
           color: #D5D5D5;
           font-weight: 300; }
-      #registration form input:focus {
+      #registration form input:focus, #login form input:focus {
         outline: 0;
         color: #ACACAC; }
-      #registration form input.submit-button {
+      #registration form input.submit-button, #login form input.submit-button {
         border: 0;
         padding: 1.5em 0;
         color: #FBFEFF;
