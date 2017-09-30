@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
 import {
-    LOGIN_FROM_JWT_SUCCESS,
+    LOGIN_SUCCESS,
     LOGOUT_USER
 } from '../actions/users';
 
@@ -14,8 +14,8 @@ const INITIAL_STATE = {
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
-
-        case LOGIN_FROM_JWT_SUCCESS:
+        case LOGIN_SUCCESS:
+            console.log('hereoijsjosds')
             return { ...state,
                 authenticated: true,
                 error: null,

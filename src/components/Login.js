@@ -3,18 +3,39 @@ import ProgressBar from './ProgressBar';
 import { connect } from 'react-redux';
 import { loginFromJWT } from '../actions/users';
 import '../assets/register.css';
+import apiService from '../actions/index.js'
 import logo from '../assets/botbot-logo.png';
 
 export class Login extends Component {
+
 	constructor (props) {
         super(props);
         this.state = { redirectToReferrer: false };
     }
 
+    handleLogin = (data) => {
+    	console.log(data);
+    	data.preventDefault();
+    	let form = new FormData();
+    	form.append('loginfield', data.target.email.value);
+    	form.append('password', data.target.password.value); 
+    	return apiService('user/auth', {
+    		method: 'POST',
+    		body: form
+    	}).then((res) => res.json())
+    		.then((json) => {
+    			console.log(json.token);
+    			console.log(json);
+    			if (json.message == 'success') {
+					this.props.loginFromJWT(json.token);
+    			}
+    		})
+    }
+
 	render () {
 		return (
 			<div style={{height: '100%'}}>
-			    <ProgressBar progress='25' />
+			    <ProgressBar progress='100' />
 
 			    <div id="login">
 				    <div className="row">
@@ -22,9 +43,9 @@ export class Login extends Component {
 				    		<img src={logo} alt="logo"/>
 				    	</div>
 				        <div className="login-form">
-				        	<form>
+				        	<form onSubmit={this.handleLogin}>
 							  <input className="email-input" type="text" name="email" placeholder="Email" /><br/>
-							  <input className="password-input" type="text" name="password" placeholder="Password" /><br/>
+							  <input className="password-input" type="password" name="password" placeholder="Password" /><br/>
 							  <input className="submit-button" type="submit" value="Login" />
 							</form>
 				        </div>
@@ -38,7 +59,7 @@ export class Login extends Component {
 
 function mapStateToProps (state) {
     return {
-        user: state.user
+        authenticated: state.user.authenicated
     };
 }
 

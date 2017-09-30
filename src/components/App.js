@@ -6,9 +6,6 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import { connect } from 'react-redux'
 
-
-
-
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
     <Route {...rest} render={props => (
         isAuthenticated
