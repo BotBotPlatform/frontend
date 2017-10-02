@@ -7,7 +7,7 @@ import {
 
 const INITIAL_STATE = {
     authenticated: false,
-    me: null,
+    bot_created: false,
     error: null,
     token: null
 };
@@ -15,11 +15,9 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case LOGIN_SUCCESS:
-            console.log('hereoijsjosds')
             return { ...state,
                 authenticated: true,
                 error: null,
-                loading: false,
                 token: action.token
             };
         case LOGOUT_USER:

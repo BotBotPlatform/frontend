@@ -14,7 +14,6 @@ export class Login extends Component {
     }
 
     handleLogin = (data) => {
-    	console.log(data);
     	data.preventDefault();
     	let form = new FormData();
     	form.append('loginfield', data.target.email.value);
