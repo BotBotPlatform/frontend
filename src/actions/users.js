@@ -1,4 +1,4 @@
-import { setCookie, loadCookie } from '../utils/cookies';
+import { setCookie, loadCookie, deleteCookie } from '../utils/cookies';
 import jwt_decode from 'jwt-decode';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -23,5 +23,6 @@ function saveToken(token) {
 export function logoutUser() {
     return function (dispatch) {
         dispatch({ type: LOGOUT_USER });
+        deleteCookie('token', {path: '/'})
     }
 }

@@ -9,7 +9,7 @@ export class RegisterUser extends Component {
 	render () {
 		return (
 			<div style={{height: '100%'}}>
-			    <ProgressBar progress='3' />
+			    <ProgressBar progress='100' />
 
 			     <div id="registration">
 				    <div className="row">
