@@ -3,7 +3,7 @@ import ProgressBar from './ProgressBar';
 import { connect } from 'react-redux';
 import { loginFromJWT } from '../actions/users';
 import '../assets/register.css';
-import apiService from '../actions/index.js'
+import apiService from '../actions/index.js';
 import logo from '../assets/botbot-logo.png';
 
 export class Login extends Component {
@@ -16,14 +16,13 @@ export class Login extends Component {
     handleLogin = (data) => {
     	data.preventDefault();
     	let form = new FormData();
-    	form.append('loginfield', data.target.email.value);
+    	form.append('email', data.target.email.value);
     	form.append('password', data.target.password.value); 
     	return apiService('user/auth', {
     		method: 'POST',
     		body: form
     	}).then((res) => res.json())
     		.then((json) => {
-    			console.log(json.token);
     			console.log(json);
     			if (json.message == 'success') {
 					this.props.loginFromJWT(json.token);

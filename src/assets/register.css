@@ -15,7 +15,7 @@
     padding-top: 1em; }
     #registration form input, #login form input {
       width: 100%; }
-      #registration form input.email-input, #registration form input.password-input, #login form input.email-input, #login form input.password-input {
+      #registration form input.email-input, #registration form input.password-input, #registration form input.verify-password-input, #login form input.email-input, #login form input.password-input, #login form input.verify-password-input {
         color: #D5D5D5;
         border: 0;
         border-bottom: 3px solid #E7E7E7;
@@ -24,7 +24,7 @@
         font-size: 1em;
         margin-bottom: 1.2em;
         font-weight: 400; }
-        #registration form input.email-input::placeholder, #registration form input.password-input::placeholder, #login form input.email-input::placeholder, #login form input.password-input::placeholder {
+        #registration form input.email-input::placeholder, #registration form input.password-input::placeholder, #registration form input.verify-password-input::placeholder, #login form input.email-input::placeholder, #login form input.password-input::placeholder, #login form input.verify-password-input::placeholder {
           color: #D5D5D5;
           font-weight: 300; }
       #registration form input:focus, #login form input:focus {
