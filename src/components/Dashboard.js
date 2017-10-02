@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ProgressBar from './ProgressBar';
+import apiService from '../actions/index.js';
+import logo from '../assets/botbot-logo.png';
+
 
 export class Dashboard extends Component {
 	render () {
