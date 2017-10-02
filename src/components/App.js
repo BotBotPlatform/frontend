@@ -34,10 +34,12 @@ const AuthRoute = withRouter(connect((state) => ({isAuthenticated: state.user.au
 
 const App = () => (
   <div>
+    <Switch>
       <UserRoute exact path="/" component={Dashboard}/>
-      <AuthRoute path='/login' component={Login}/>
-      <AuthRoute path='/register' component={Register}/>
-      <Route path='/dashboard' component={Dashboard}/>
+      <AuthRoute path="/login" component={Login}/>
+      <AuthRoute path="/register" component={Register}/>
+      <Redirect from="*" to="/"/>
+    </Switch>
   </div>
 )
 
