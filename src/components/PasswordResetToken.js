@@ -6,32 +6,27 @@ import '../assets/register.css';
 import apiService from '../actions/index.js';
 import logo from '../assets/botbot-logo.png';
 
-export class Login extends Component {
+export class PasswordResetUser extends Component {
 
 	constructor (props) {
         super(props);
-        this.state = { 
-			redirectToReferrer: false,
-			authError:false
-			};
+        this.state = { redirectToReferrer: false };
     }
 
-    handleLogin = (data) => {
+    resetPass = (data) => {
     	data.preventDefault();
     	let form = new FormData();
-    	form.append('email', data.target.email.value);
-    	form.append('password', data.target.password.value); 
-    	return apiService('user/auth', {
+    	form.append('email', data.target.token.value);
+        form.append('password', data.target.password.value);
+    	return apiService('user/reset/store', {
     		method: 'POST',
     		body: form
     	}).then((res) => res.json())
     		.then((json) => {
     			console.log(json);
     			if (json.message == 'success') {
-					this.props.loginFromJWT(json.token);
-    			} else{
-					this.setState({authError:true});
-				}
+					this.props.history.push('/login');
+    			}
     		})
     }
 
@@ -45,18 +40,17 @@ export class Login extends Component {
 				    	<div className="logo">
 				    		<img src={logo} alt="logo"/>
 				    	</div>
-				        <div className="login-form">
-				        	<form onSubmit={this.handleLogin}>
-							  <input className="email-input" type="text" name="email" placeholder="Email" /><br/>
-							  <input className="password-input" type="password" name="password" placeholder="Password" /><br/>
-							  <ErrorMsg authError={this.state.authError} />
-							  <input className="submit-button" type="submit" value="Login" />
+				        <div className="password-reset-form">
+				        	<form onSubmit={this.resetPass}>
+							  <input className="email-input" type="text" name="email" placeholder="Verification Token" /><br/>
+                              <input className="password-input" type="text" name="password" placeholder="New Password" /><br/>
+							  <input className="submit-button" type="submit" value="Reset Password" />
 							</form>
 				        </div>
-						<div className="password-reset-navigation">
-				        	<a href="./passreset">Forgot your password?</a>
+                        <div className="login-navigation">
+				        	<a href="./login">Already have an account?</a>
 				        </div>
-				        <div className="register-navigation">
+                        <div className="register-navigation">
 				        	<a href="./register">Need to Register?</a>
 				        </div>
 				    </div>
@@ -65,14 +59,6 @@ export class Login extends Component {
 			  </div>
 		);
 	}
-}
-
-function ErrorMsg(props){
-	 if(props.authError){
-		return <p>Invalid Credentials</p>;
-	}
-	else 
-		return <p></p>;
 }
 
 function mapStateToProps (state) {
@@ -87,4 +73,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(PasswordResetUser);

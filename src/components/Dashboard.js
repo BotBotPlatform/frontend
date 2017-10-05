@@ -18,12 +18,35 @@ export class Dashboard extends Component {
 		this.props.history.push('/login');
 	}
 
+	createBot = (b) => {
+		b.preventDefault();
+		return apiService('bot',{
+			method: 'POST'
+		})
+	}
+
+	botInfo = (b) => {
+		b.preventDefault();
+		return apiService('bot',{
+			method: 'GET'
+		})
+	}
+
+	deleteBot = (b) => {
+		b.preventDefault();
+		return apiService('bot',{
+			method: 'DELETE'
+		})
+	}
+
 	render () {
 		return (
 			<div>
     			<ProgressBar progress='100' />
     			Dashboard
-
+				<button onClick={this.createBot}>Create bot</button>
+				<button onClick={this.botInfo}>Get Bot Info</button>
+				<button onClick={this.deleteBot}>Delete bot</button>
     			<a href="#" onClick={this.handleLogout}>Logout</a>
   			</div>
 		);

@@ -4,7 +4,8 @@ import '../assets/App.css';
 import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
-import { connect } from 'react-redux'
+import PassReset from './PasswordReset';
+import { connect } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
     <Route {...rest} render={props => (
@@ -36,6 +37,7 @@ const App = () => (
   <div>
     <Switch>
       <UserRoute exact path="/" component={Dashboard}/>
+      <AuthRoute path="/passreset" component={PassReset}/>
       <AuthRoute path="/login" component={Login}/>
       <AuthRoute path="/register" component={Register}/>
       <Redirect from="*" to="/"/>
