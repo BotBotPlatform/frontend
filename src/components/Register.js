@@ -4,6 +4,7 @@ import '../assets/register.css';
 import logo from '../assets/botbot-logo.png';
 import { connect } from 'react-redux';
 import { loginFromJWT } from '../actions/users';
+import apiService from '../actions/index.js';
 import RegisterUser from './RegisterUser';
 import RegisterSetup from './RegisterSetup';
 import RegisterPageAccessToken from './RegisterPageAccessToken';
@@ -14,9 +15,19 @@ export class Register extends Component {
         this.state = { 
         	isRegistered: false,
         	hasAccessToken: false,
-        	promptedSetup: false
         };
     };
+
+    componentWillMount() {
+        apiService('user/token', {
+            method: 'GET'
+        }).then((res) => res.json())
+            .then((json) => {
+                if (json.message == 'success') {
+                    this.setState({ isRegistered: true })
+                }
+        })
+    }
 
 	render () {
 		return (
@@ -39,7 +50,9 @@ function Registration(props) {
     	} else {
     		return <RegisterUser />;
     	}
-   }
+}
+
+
 
 function mapStateToProps (state) {
     return {

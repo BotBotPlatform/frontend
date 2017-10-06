@@ -43,10 +43,10 @@ export class Dashboard extends Component {
 		return (
 			<div>
     			<ProgressBar progress='100' />
-    			Dashboard
-				<button onClick={this.createBot}>Create bot</button>
-				<button onClick={this.botInfo}>Get Bot Info</button>
-				<button onClick={this.deleteBot}>Delete bot</button>
+    			Dashboard<br/><br/>
+				<button onClick={this.createBot}>Create bot</button><br/>
+				<button onClick={this.botInfo}>Get Bot Info</button><br/>
+				<button onClick={this.deleteBot}>Delete bot</button><br/>
     			<a href="#" onClick={this.handleLogout}>Logout</a>
   			</div>
 		);

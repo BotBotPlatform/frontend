@@ -12,8 +12,9 @@ export class Login extends Component {
         super(props);
         this.state = { 
 			redirectToReferrer: false,
-			authError:false
-			};
+			authError:false,
+			errors: null
+		};
     }
 
     handleLogin = (data) => {
@@ -30,7 +31,7 @@ export class Login extends Component {
     			if (json.message == 'success') {
 					this.props.loginFromJWT(json.token);
     			} else{
-					this.setState({authError:true});
+					this.setState({authError:true, errors:json.errors});
 				}
     		})
     }
@@ -49,7 +50,7 @@ export class Login extends Component {
 				        	<form onSubmit={this.handleLogin}>
 							  <input className="email-input" type="text" name="email" placeholder="Email" /><br/>
 							  <input className="password-input" type="password" name="password" placeholder="Password" /><br/>
-							  <ErrorMsg authError={this.state.authError} />
+							  <ErrorMsg authError={this.state.authError} errors={this.state.errors}/>
 							  <input className="submit-button" type="submit" value="Login" />
 							</form>
 				        </div>
@@ -68,8 +69,12 @@ export class Login extends Component {
 }
 
 function ErrorMsg(props){
-	 if(props.authError){
-		return <p>Invalid Credentials</p>;
+	if(props.authError){
+	 	var err = '';
+	 	for (var e in props.errors) {
+	 		err += props.errors[e] + '\n';
+	 	}
+		return <p>{err}</p>;
 	}
 	else 
 		return <p></p>;

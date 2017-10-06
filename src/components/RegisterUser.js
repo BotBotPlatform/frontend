@@ -5,14 +5,16 @@ import '../assets/register.css';
 import logo from '../assets/botbot-logo.png';
 import apiService from '../actions/index.js';
 import { loginFromJWT } from '../actions/users';
+import { Redirect } from 'react-router-dom'
 
 export class RegisterUser extends Component {
 
 	constructor (props) {
         super(props);
         this.state = { 
-			authError:false
-			};
+			authError:false,
+			errors: null
+		};
     }
 
 	handleRegister = (data) => {
@@ -31,7 +33,7 @@ export class RegisterUser extends Component {
 					this.props.loginFromJWT(json.token);
     			}
 				else{
-					this.setState({authError:true});
+					this.setState({authError:true, errors:json.errors});
 				}
     		})
     }
@@ -51,7 +53,7 @@ export class RegisterUser extends Component {
 							  <input className="email-input" type="text" name="email" placeholder="Email" /><br/>
 							  <input className="password-input" type="password" name="password" placeholder="Password" /><br/>
 							  <input className="verify-password-input" type="password" name="password-verify" placeholder="Verify Password" /><br/>
-							  <ErrorMsg authError={this.state.authError} />
+							  <ErrorMsg authError={this.state.authError} errors={this.state.errors}/>
 							  <input className="submit-button" type="submit" value="Register Now" />
 							</form>
 				        </div>
@@ -69,7 +71,11 @@ export class RegisterUser extends Component {
 
 function ErrorMsg(props){
 	 if(props.authError){
-		return <p>Invalid Information</p>;
+	 	var err = '';
+	 	for (var e in props.errors) {
+	 		err += props.errors[e] + '\n';
+	 	}
+		return <p>{err}</p>;
 	}
 	else 
 		return <p></p>;
