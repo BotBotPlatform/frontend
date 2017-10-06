@@ -4,8 +4,10 @@ import ProgressBar from './ProgressBar';
 import '../assets/register.css';
 import logo from '../assets/botbot-logo.png';
 import apiService from '../actions/index.js';
-import { loginFromJWT } from '../actions/users';
-import { Redirect } from 'react-router-dom'
+import { loginFromJWT, registerUser } from '../actions/users';
+import { withRouter} from 'react-router-dom';
+import { setCookie } from '../utils/cookies';
+
 
 export class RegisterUser extends Component {
 
@@ -28,9 +30,9 @@ export class RegisterUser extends Component {
     		body: form
     	}).then((res) => res.json())
     		.then((json) => {
-    			console.log(json);
     			if (json.message == 'success') {
-					this.props.loginFromJWT(json.token);
+    				console.log(json);
+    				this.props.registerUser(json.token);
     			}
 				else{
 					this.setState({authError:true, errors:json.errors});
@@ -83,14 +85,14 @@ function ErrorMsg(props){
 
 function mapStateToProps (state) {
     return {
-        user: state.user
+        registered: state.user.registered
     };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	loginFromJWT: (token) => {
-	        dispatch(loginFromJWT(token));
+	registerUser: (token) => {
+	        dispatch(registerUser(token));
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterUser);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterUser));

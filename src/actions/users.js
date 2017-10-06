@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 
 export function loginFromJWT (token) {
 	setCookie('token', token, {path: '/'});
@@ -18,6 +19,14 @@ function saveToken(token) {
 		type: LOGIN_SUCCESS,
 		token: token
 	}
+}
+
+export function registerUser(token) {
+    return function (dispatch) {
+        console.log('doop')
+        dispatch({type: REGISTER_SUCCESS});
+        setCookie('token', token, {path: '/'});
+    }
 }
 
 export function logoutUser() {

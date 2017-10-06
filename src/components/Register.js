@@ -4,6 +4,8 @@ import '../assets/register.css';
 import logo from '../assets/botbot-logo.png';
 import { connect } from 'react-redux';
 import { loginFromJWT } from '../actions/users';
+import { withRouter} from 'react-router-dom';
+
 import apiService from '../actions/index.js';
 import RegisterUser from './RegisterUser';
 import RegisterSetup from './RegisterSetup';
@@ -31,7 +33,7 @@ export class Register extends Component {
 
 	render () {
 		return (
-			<Registration isRegistered={this.state.isRegistered} hasAccessToken={this.state.hasAccessToken} promptedSetup={this.state.promptedSetup}/>
+			<Registration isRegistered={this.props.registered} hasAccessToken={this.state.hasAccessToken} promptedSetup={this.state.promptedSetup}/>
 		);
 	}
 }
@@ -56,7 +58,7 @@ function Registration(props) {
 
 function mapStateToProps (state) {
     return {
-        user: state.user
+        registered: state.user.registered
     };
 }
 
@@ -66,4 +68,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register));

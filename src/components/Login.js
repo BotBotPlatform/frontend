@@ -5,6 +5,7 @@ import { loginFromJWT } from '../actions/users';
 import '../assets/register.css';
 import apiService from '../actions/index.js';
 import logo from '../assets/botbot-logo.png';
+import { withRouter} from 'react-router-dom';
 
 export class Login extends Component {
 
@@ -92,4 +93,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
