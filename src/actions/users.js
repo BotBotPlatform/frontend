@@ -7,11 +7,7 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 
 export function loginFromJWT (token) {
 	setCookie('token', token, {path: '/'});
-
-    return function (dispatch) {
-
-        dispatch(saveToken(token));
-    }
+  return saveToken(token);
 }
 
 function saveToken(token) {

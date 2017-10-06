@@ -11,7 +11,7 @@ export class Login extends Component {
 
 	constructor (props) {
         super(props);
-        this.state = { 
+        this.state = {
 			redirectToReferrer: false,
 			authError:false,
 			errors: null
@@ -22,7 +22,7 @@ export class Login extends Component {
     	data.preventDefault();
     	let form = new FormData();
     	form.append('email', data.target.email.value);
-    	form.append('password', data.target.password.value); 
+    	form.append('password', data.target.password.value);
     	return apiService('user/auth', {
     		method: 'POST',
     		body: form
@@ -30,10 +30,10 @@ export class Login extends Component {
     		.then((json) => {
     			console.log(json);
     			if (json.message == 'success') {
-					this.props.loginFromJWT(json.token);
-    			} else{
-					this.setState({authError:true, errors:json.errors});
-				}
+						this.props.onLogin(json.token);
+    			} else {
+						this.setState({authError:true, errors:json.errors});
+					}
     		})
     }
 
@@ -77,7 +77,7 @@ function ErrorMsg(props){
 	 	}
 		return <p>{err}</p>;
 	}
-	else 
+	else
 		return <p></p>;
 }
 
@@ -88,8 +88,8 @@ function mapStateToProps (state) {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	loginFromJWT: (token) => {
-	        dispatch(loginFromJWT(token));
+	onLogin: (token) => {
+    dispatch(loginFromJWT(token));
 	}
 });
 
