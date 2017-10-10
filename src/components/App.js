@@ -6,6 +6,7 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import PassReset from './PasswordReset';
 import { connect } from 'react-redux';
+import AdminPanel from './AdminPanel';
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
     <Route {...rest} render={props => (
@@ -40,6 +41,7 @@ const App = () => (
       <AuthRoute path="/passreset" component={PassReset}/>
       <AuthRoute path="/login" component={Login}/>
       <AuthRoute path="/register" component={Register}/>
+      <AuthRoute path="/admin" component={AdminPanel}/>
       <Redirect from="*" to="/"/>
     </Switch>
   </div>
