@@ -59,8 +59,10 @@ export class RegisterUser extends Component {
 							  <input className="submit-button" type="submit" value="Register Now" />
 							</form>
 				        </div>
-				        <div className="login-navigation">
-				        	<a href="./login">Already have an account?</a>
+				        <div className="register-navigation">
+				        	<ul>
+				        		<li><a href="./login">Already have an account?</a></li>
+				        	</ul>
 				        </div>
 				    </div>
 				</div>

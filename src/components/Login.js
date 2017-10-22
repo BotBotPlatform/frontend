@@ -55,11 +55,11 @@ export class Login extends Component {
 							  <input className="submit-button" type="submit" value="Login" />
 							</form>
 				        </div>
-						<div className="password-reset-navigation">
-				        	<a href="./passreset">Forgot your password?</a>
-				        </div>
 				        <div className="register-navigation">
-				        	<a href="./register">Need to Register?</a>
+				        <ul>
+				        	<li><a href="./passreset">Forgot your password?</a></li>
+				        	<li><a href="./register">Need to Register?</a></li>
+				        </ul>
 				        </div>
 				    </div>
 				</div>

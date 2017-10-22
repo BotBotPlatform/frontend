@@ -42,3 +42,18 @@
         font-weight: 500;
         background: linear-gradient(90deg, #7FFEE8, #8DC9FF);
         border-radius: 5em; }
+  #registration .register-navigation, #login .register-navigation {
+    text-align: center; }
+    #registration .register-navigation ul, #login .register-navigation ul {
+      list-style: none;
+      display: inline-block;
+      text-align: initial; }
+      #registration .register-navigation ul li, #login .register-navigation ul li {
+        margin: 0 25px 0 0;
+        padding: 0;
+        float: left; }
+        #registration .register-navigation ul li a, #login .register-navigation ul li a {
+          font-size: 0.8em;
+          color: #acacac; }
+          #registration .register-navigation ul li a:hover, #login .register-navigation ul li a:hover {
+            color: #8fcbfc; }

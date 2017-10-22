@@ -53,11 +53,12 @@ resetPass = (data) => {
 							  <input className="submit-button" type="submit" value="Send Verification Email" />
 							</form>
 				        </div>
-                        <div className="login-navigation">
-				        	<a href="./login">Already have an account?</a>
-				        </div>
                         <div className="register-navigation">
-				        	<a href="./register">Need to Register?</a>
+                        	<ul>
+                        		<li><a href="./login">Already have an account?</a></li>
+                        		<li><a href="./register">Need to Register?</a></li>
+                        	</ul>
+				        	
 				        </div>
 				    </div>
 				</div>
