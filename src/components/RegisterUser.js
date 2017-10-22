@@ -31,7 +31,6 @@ export class RegisterUser extends Component {
     	}).then((res) => res.json())
     		.then((json) => {
     			if (json.message == 'success') {
-    				console.log(json);
     				this.props.registerUser(json.token);
     			}
 				else{

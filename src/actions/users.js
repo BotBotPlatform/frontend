@@ -19,7 +19,6 @@ function saveToken(token) {
 
 export function registerUser(token) {
     return function (dispatch) {
-        console.log('doop')
         dispatch({type: REGISTER_SUCCESS});
         setCookie('token', token, {path: '/'});
     }
