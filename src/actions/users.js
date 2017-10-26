@@ -6,6 +6,7 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 
 export function loginFromJWT (token) {
+    console.log(token);
 	setCookie('token', token, {path: '/'});
   return saveToken(token);
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 import apiService from '../actions/index.js';
-import logo from '../assets/botbot-logo.png';
 import { logoutUser } from '../actions/users';
 
 
@@ -47,7 +46,8 @@ export class Dashboard extends Component {
 				<button onClick={this.createBot}>Create bot</button><br/>
 				<button onClick={this.botInfo}>Get Bot Info</button><br/>
 				<button onClick={this.deleteBot}>Delete bot</button><br/>
-    			<a href="#" onClick={this.handleLogout}>Logout</a>
+    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
+    			<a href="./dashboard/feedback">Feedback</a>
   			</div>
 		);
 	}

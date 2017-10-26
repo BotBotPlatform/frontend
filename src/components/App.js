@@ -4,6 +4,7 @@ import '../assets/App.css';
 import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
+import Feedback from './Feedback';
 import PassReset from './PasswordReset';
 import { connect } from 'react-redux';
 import AdminPanel from './AdminPanel';
@@ -42,6 +43,7 @@ const App = () => (
       <AuthRoute path="/login" component={Login}/>
       <AuthRoute path="/register" component={Register}/>
       <AuthRoute path="/admin" component={AdminPanel}/>
+      <UserRoute path="/dashboard/feedback" component={Feedback} />
       <Redirect from="*" to="/"/>
     </Switch>
   </div>

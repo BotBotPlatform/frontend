@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import ProgressBar from './ProgressBar';
 import '../assets/register.css';
-import logo from '../assets/botbot-logo.png';
 import { connect } from 'react-redux';
 import { loginFromJWT } from '../actions/users';
 import { withRouter} from 'react-router-dom';
@@ -25,7 +23,7 @@ export class Register extends Component {
             method: 'GET'
         }).then((res) => res.json())
             .then((json) => {
-                if (json.message == 'success') {
+                if (json.message === 'success') {
                     this.setState({ isRegistered: true })
                 }
         })
