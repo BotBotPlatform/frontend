@@ -75,5 +75,39 @@ form {
 }
 
 }
+.registration-setup {
+    list-style: none;
+    color: #acacac;
+    font-size: 1.25em;
+    li {
+        padding: 1em;
+        .num {
+            color: #acacac;
+            font-weight: 500;
+            background: none;
+            padding-right: 7px;
+        }
+        .info {
+            color: #f9f9f9;
+            font-style: italic;
+            background-color: #89b8fc;
+            padding: 3px 6px;
+            border-radius: 15px;
+            &::selection {
+                background: #86f7eb;
+            }
+        }
+        a {
+            color: #89b8fc;
+            font-weight: 500;
+            text-decoration: none;
+            &:hover {
+                color: #86f7eb;
+            }
+        }
+    }
+    
+    
+}
 
 }

@@ -38,8 +38,6 @@ export class Register extends Component {
 function Registration(props) {
     	const isRegistered = props.isRegistered;
     	const hasAccessToken = props.hasAccessToken;
-        console.log(isRegistered);
-        console.log(hasAccessToken);
 
     	if (!isRegistered) {
     		return <RegisterUser />;

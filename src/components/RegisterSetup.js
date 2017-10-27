@@ -2,15 +2,26 @@ import React, { Component } from 'react';
 import ProgressBar from './ProgressBar';
 import '../assets/register.css';
 import RegisterPageAccessToken from './RegisterPageAccessToken';
-
+import apiService from '../actions/index.js';
 
 
 export class RegisterSetup extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			hasPromptedSetup: false
+			hasPromptedSetup: false,
+			verificationToken: 'verify-token'
 		};
+	}
+
+	componentWillMount() {
+		apiService('user/token', { method: 'GET' })
+    	.then((res) => res.json())
+        	.then((json) => { 
+        		if (json['verification_token']) { 
+        			this.setState({verificationToken: json['verification_token']});
+        		}
+        	});
 	}
 
 	handleSetup = () => {
@@ -25,10 +36,10 @@ export class RegisterSetup extends Component {
 
 			    <div id="registration">
 				    <ul className="registration-setup">
-				    	<li>1. Go to <a href="https://developers.facebook.com/docs/messenger-platform/">Facebook</a> and create an application for your Facebook page.</li>
-				    	<li>2. Enter botbotplatform.com/webhook as your callback URL</li>
-				    	<li>3. Set your verification token to 'verify-token-sample'</li>
-				    	<li>4. Click Generate Access Token</li>
+				    	<li><mark className="num">1.</mark> Go to <a href="https://developers.facebook.com/docs/messenger-platform/">Facebook</a> and create a bot application for your Facebook page.</li>
+				    	<li><mark className="num">2.</mark> Enter <mark className="info">botbotplatform.com/webhook</mark> as your callback URL</li>
+				    	<li><mark className="num">3.</mark> Set your verification token to <mark className="info">{this.state.verificationToken}</mark></li>
+				    	<li><mark className="num">4.</mark> Click Generate Page Access Token</li>
 				    </ul>
 				    <div>
 				     <input onClick={this.handleSetup} className="submit-button" type="submit" value="Next" />
