@@ -7,14 +7,25 @@ import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { loadCookie } from './utils/cookies';
-import { loginFromJWT } from './actions/users';
+import { loginFromJWT, registerAccessToken } from './actions/users';
 import ReduxThunk from 'redux-thunk';
+import apiService from './actions/index.js';
 
 
 const store = configureStore();
 
 const token = loadCookie('token');
+
+function hasAccess() {
+	var access = false;
+    apiService('user/token', { method: 'GET' })
+    	.then((res) => res.json())
+        	.then((json) => { if (json['facebook_token']) { store.dispatch(registerAccessToken(token)); }});
+};
+    
 if (token) store.dispatch(loginFromJWT(token));
+hasAccess();
+
 
 ReactDOM.render((
 	<Provider store={store}>

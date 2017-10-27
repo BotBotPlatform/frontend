@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/register.css';
 import { connect } from 'react-redux';
-import { loginFromJWT } from '../actions/users';
+import { registerAccessToken } from '../actions/users';
 import { withRouter} from 'react-router-dom';
 
 import apiService from '../actions/index.js';
@@ -13,8 +13,7 @@ export class Register extends Component {
 	constructor (props) {
         super(props);
         this.state = { 
-        	isRegistered: false,
-        	hasAccessToken: false,
+        	hasAccessToken: false
         };
     };
 
@@ -23,15 +22,15 @@ export class Register extends Component {
             method: 'GET'
         }).then((res) => res.json())
             .then((json) => {
-                if (json.message === 'success') {
-                    this.setState({ isRegistered: true })
+                if (json['facebook_token']) {
+                    this.setState({ hasAccessToken: true })
                 }
         })
     }
 
 	render () {
 		return (
-			<Registration isRegistered={this.props.registered} hasAccessToken={this.state.hasAccessToken} promptedSetup={this.state.promptedSetup}/>
+			<Registration isRegistered={this.props.registered} hasAccessToken={this.state.hasAccessToken} />
 		);
 	}
 }
@@ -39,13 +38,12 @@ export class Register extends Component {
 function Registration(props) {
     	const isRegistered = props.isRegistered;
     	const hasAccessToken = props.hasAccessToken;
-    	const hasBeenPrompted = props.promptedSetup;
+        console.log(isRegistered);
+        console.log(hasAccessToken);
 
     	if (!isRegistered) {
     		return <RegisterUser />;
-    	} else if (isRegistered && hasBeenPrompted) {
-    		return <RegisterPageAccessToken />;
-    	} else if (isRegistered && !hasBeenPrompted) {
+    	} else if (isRegistered && !hasAccessToken) {
     		return <RegisterSetup />;
     	} else {
     		return <RegisterUser />;
@@ -56,14 +54,15 @@ function Registration(props) {
 
 function mapStateToProps (state) {
     return {
-        registered: state.user.registered
+        registered: state.user.registered,
+        access: state.user.access
     };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-	loginFromJWT: (token) => {
-	        dispatch(loginFromJWT(token));
-	}
+	registerAccessToken: (token) => {
+            dispatch(registerAccessToken(token));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register));

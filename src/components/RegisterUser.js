@@ -34,7 +34,7 @@ export class RegisterUser extends Component {
     				this.props.registerUser(json.token);
     			}
 				else{
-					this.setState({authError:true, errors:json.errors});
+					this.setState({ authError:true, errors:json.errors });
 				}
     		})
     }

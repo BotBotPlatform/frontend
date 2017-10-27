@@ -7,8 +7,7 @@ const configureStore = preloadedState => createStore(
     preloadedState,
     compose(
     	applyMiddleware(thunk),
-    	window.__REDUX_DEVTOOLS_EXTENSION__ ? window.devToolsExtension() : f => f)
-    
-);
+    	window.__REDUX_DEVTOOLS_EXTENSION__ ? window.devToolsExtension() && window.__REDUX_DEVTOOLS_EXTENSION__() : f => f)
+    );
 
 export default configureStore;

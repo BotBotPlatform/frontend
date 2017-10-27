@@ -4,11 +4,12 @@ import jwt_decode from 'jwt-decode';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const ACCESS_SUCCESS = 'ACCESS_SUCCESS';
 
 export function loginFromJWT (token) {
     console.log(token);
 	setCookie('token', token, {path: '/'});
-  return saveToken(token);
+    return saveToken(token);
 }
 
 function saveToken(token) {
@@ -22,6 +23,13 @@ export function registerUser(token) {
     return function (dispatch) {
         dispatch({type: REGISTER_SUCCESS});
         setCookie('token', token, {path: '/'});
+    }
+}
+
+export function registerAccessToken(token) {
+    console.log('here');
+    return function (dispatch) {
+        dispatch({type: ACCESS_SUCCESS});
     }
 }
 

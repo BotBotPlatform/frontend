@@ -5,12 +5,7 @@ import apiService from '../actions/index.js';
 import { Redirect } from 'react-router-dom';
 import { loadCookie } from '../utils/cookies';
 import { connect } from 'react-redux';
-import { loginFromJWT } from '../actions/users';
-
-
-
-
-
+import { loginFromJWT, registerAccessToken } from '../actions/users';
 
 export class RegisterPageAccessToken extends Component {
 
@@ -31,6 +26,7 @@ export class RegisterPageAccessToken extends Component {
     		.then((json) => {
     			console.log(json);
     			if (json.message == 'success') {
+    				this.props.registerAccessToken(loadCookie('token')); 
     				this.props.loginFromJWT(loadCookie('token')); 
     			} 
     		})
@@ -66,13 +62,19 @@ export class RegisterPageAccessToken extends Component {
 
 
 function mapStateToProps (state) {
-    return;
+    return {
+        authenticated: state.user.authenicated,
+        access: state.user.access
+    };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	loginFromJWT: (token) => {
 	        dispatch(loginFromJWT(token));
-	}
+	},
+	registerAccessToken: (token) => {
+            dispatch(registerAccessToken(token));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterPageAccessToken);

@@ -1,9 +1,11 @@
 import jwtDecode from 'jwt-decode';
+import apiService from '../actions/index.js';
 
 import {
     LOGIN_SUCCESS,
     LOGOUT_USER,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    ACCESS_SUCCESS
 } from '../actions/users';
 
 const INITIAL_STATE = {
@@ -11,7 +13,8 @@ const INITIAL_STATE = {
     bot_created: false,
     error: null,
     token: null,
-    registered: false
+    registered: false,
+    access: false
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -27,8 +30,12 @@ export default function (state = INITIAL_STATE, action) {
             return { ...state,
                 authenticated: false,
                 error: null,
-                token: null,
+                token: action.token,
                 registered: true
+            }
+        case ACCESS_SUCCESS:
+            return { ...state,
+                access: true
             }
         case LOGOUT_USER:
             return INITIAL_STATE;
