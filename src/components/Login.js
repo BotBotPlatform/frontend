@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProgressBar from './ProgressBar';
 import { connect } from 'react-redux';
-import { loginFromJWT } from '../actions/users';
+import { loginFromJWT, registerAccessToken } from '../actions/users';
 import '../assets/register.css';
 import apiService from '../actions/index.js';
 import logo from '../assets/botbot-logo.png';
@@ -18,6 +18,14 @@ export class Login extends Component {
 		};
     }
 
+    hasAccess() {
+		var access = false;
+	    apiService('user/token', { method: 'GET' })
+	    	.then((res) => res.json())
+	        	.then((json) => { if (json['facebook_token']) { this.props.onRegisterAccess(); }});
+	};
+
+
     handleLogin = (data) => {
     	data.preventDefault();
     	let form = new FormData();
@@ -31,6 +39,7 @@ export class Login extends Component {
     			console.log(json);
     			if (json.message == 'success') {
 						this.props.onLogin(json.token);
+						this.hasAccess();
     			} else {
 						this.setState({authError:true, errors:json.errors});
 					}
@@ -89,7 +98,10 @@ function mapStateToProps (state) {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onLogin: (token) => {
-    dispatch(loginFromJWT(token));
+    	dispatch(loginFromJWT(token));
+	},
+	onRegisterAccess() {
+		dispatch(registerAccessToken());
 	}
 });
 

@@ -26,7 +26,7 @@ export class RegisterPageAccessToken extends Component {
     		.then((json) => {
     			console.log(json);
     			if (json.message == 'success') {
-    				this.props.registerAccessToken(loadCookie('token')); 
+    				this.props.registerAccessToken(); 
     				this.props.loginFromJWT(loadCookie('token')); 
     			} 
     		})
@@ -72,8 +72,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 	loginFromJWT: (token) => {
 	        dispatch(loginFromJWT(token));
 	},
-	registerAccessToken: (token) => {
-            dispatch(registerAccessToken(token));
+	registerAccessToken() {
+            dispatch(registerAccessToken());
     }
 });
 

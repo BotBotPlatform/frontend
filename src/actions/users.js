@@ -1,5 +1,6 @@
 import { setCookie, loadCookie, deleteCookie } from '../utils/cookies';
 import jwt_decode from 'jwt-decode';
+import apiService from './index.js';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_USER = 'LOGOUT_USER';
@@ -26,8 +27,7 @@ export function registerUser(token) {
     }
 }
 
-export function registerAccessToken(token) {
-    console.log('here');
+export function registerAccessToken() {
     return function (dispatch) {
         dispatch({type: ACCESS_SUCCESS});
     }
