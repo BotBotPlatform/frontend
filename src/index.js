@@ -20,7 +20,7 @@ function hasAccess() {
 	var access = false;
     apiService('user/token', { method: 'GET' })
     	.then((res) => res.json())
-        	.then((json) => { if (json['facebook_token']) { store.dispatch(registerAccessToken(token)); }});
+        	.then((json) => { if (json['facebook_token']) { store.dispatch(registerAccessToken()); }});
 };
     
 if (token) store.dispatch(loginFromJWT(token));
