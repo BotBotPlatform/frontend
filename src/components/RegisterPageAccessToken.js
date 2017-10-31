@@ -42,18 +42,17 @@ export class RegisterPageAccessToken extends Component {
 	render () {
 		return (
 			<div style={{height: '100%'}}>
-			    <ProgressBar progress='66' />
-
+			    	<ProgressBar progress='66' />
+			    	
 			    <div id="registration">
-			    	<div>
-			    	<h3>Enter page access token:</h3><br/><br/>
-			    	</div><div>
-				    <input value={this.state.accessValue} onChange={e => this.updateInputValue(e)}  placeholder="Page Access Token" />
-				    <div>
-				     <input onClick={this.handlePageAccessToken} className="submit-button" type="submit" value="Next" />
-				     </div>
-				    </div>
-				</div>
+			    	<div className="row">
+				    	<h3>Enter page access token</h3><br/><br/>
+					    <input className="setup-input" value={this.state.accessValue} onChange={e => this.updateInputValue(e)}  placeholder="Page Access Token" />
+					    <div>
+					    	<input onClick={this.handlePageAccessToken} className="setup-button" type="submit" value="Next" />
+					    </div>
+					</div>
+					</div>
 
 			  </div>
 		);
