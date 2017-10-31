@@ -33,7 +33,7 @@ const PublicRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 
 
 const UserRoute = withRouter(connect((state) => ({isAuthenticated: state.user.authenticated }))(PrivateRoute));
-const AuthRoute = withRouter(connect((state) => ({isAuthenticated: state.user.authenticated }))(PublicRoute));
+const AuthRoute = withRouter(connect((state) => ({isAuthenticated: state.user.authenticated && state.user.access }))(PublicRoute));
 
 const App = () => (
   <div>

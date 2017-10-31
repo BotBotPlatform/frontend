@@ -55,8 +55,7 @@ export class Dashboard extends Component {
 
 function mapStateToProps (state) {
     return {
-        authenticated: state.user.authenticated,
-        access: state.user.access
+        user: state.user
     };
 }
 
