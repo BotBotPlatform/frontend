@@ -1,0 +1,52 @@
+#dashboard {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin: 0; }
+  #dashboard .row {
+    width: 50%;
+    margin: 0 auto;
+    clear: both; }
+  #dashboard h3 {
+    color: #acacac;
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 1.5em; }
+  #dashboard ul.feedback-buttons {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    #dashboard ul.feedback-buttons li {
+      float: left;
+      margin: 0;
+      padding: 0; }
+      #dashboard ul.feedback-buttons li button {
+        border: 0;
+        padding: 1em 2em;
+        color: #FBFEFF;
+        font-size: 0.75em;
+        font-weight: 500;
+        background: #89b8fc;
+        border-radius: 5em; }
+        #dashboard ul.feedback-buttons li button:hover {
+          background-color: #86f7eb;
+          cursor: pointer; }
+        #dashboard ul.feedback-buttons li button:focus {
+          outline: 0; }
+      #dashboard ul.feedback-buttons li span {
+        margin: 0 1.5em 0 0.3em;
+        color: #CCC; }
+        #dashboard ul.feedback-buttons li span:hover {
+          color: #858585;
+          cursor: pointer; }
+  #dashboard ul.current-feedback {
+    background-color: #eee;
+    border-radius: 1.5em;
+    padding: 1.5em; }
+    #dashboard ul.current-feedback li {
+      color: #858585;
+      margin-left: 1.5em;
+      padding: 1em 0; }
+  #dashboard .clear {
+    clear: both; }

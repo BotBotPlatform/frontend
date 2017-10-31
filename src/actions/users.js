@@ -35,7 +35,7 @@ export function registerAccessToken() {
 
 export function logoutUser() {
     return function (dispatch) {
-        dispatch({ type: LOGOUT_USER });
         deleteCookie('token', {path: '/'})
+        dispatch({ type: LOGOUT_USER });
     }
 }
