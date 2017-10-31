@@ -115,7 +115,7 @@ export class Feedback extends Component {
           				}, this)}
                         <div className="clear"></div>
 			    	</ul>
-                    <ul className="current-feedback">
+                    <ul className={(this.state.currentFeedback.length > 0) ? "current-feedback" : "hidden"}>
                         {this.state.currentFeedback.map(function(feedbackValue, index){
                             return (
                                 <li key={feedbackValue.id}>{feedbackValue.message}</li>
