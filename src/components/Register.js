@@ -12,25 +12,13 @@ import RegisterPageAccessToken from './RegisterPageAccessToken';
 export class Register extends Component {
 	constructor (props) {
         super(props);
-        this.state = { 
-        	hasAccessToken: false
-        };
+        console.log(this.props.access);
+        console.log(this.props.registered);
     };
-
-    componentWillMount() {
-        apiService('user/token', {
-            method: 'GET'
-        }).then((res) => res.json())
-            .then((json) => {
-                if (json['facebook_token']) {
-                    this.setState({ hasAccessToken: true })
-                }
-        })
-    }
 
 	render () {
 		return (
-			<Registration isRegistered={this.props.registered} hasAccessToken={this.state.hasAccessToken} />
+			<Registration isRegistered={this.props.registered} hasAccessToken={this.props.access} />
 		);
 	}
 }
@@ -53,7 +41,8 @@ function Registration(props) {
 function mapStateToProps (state) {
     return {
         registered: state.user.registered,
-        access: state.user.access
+        access: state.user.access,
+        authenticated: state.user.authenticated
     };
 }
 

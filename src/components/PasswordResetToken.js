@@ -63,7 +63,8 @@ export class PasswordResetUser extends Component {
 
 function mapStateToProps (state) {
     return {
-        authenticated: state.user.authenicated
+        authenticated: state.user.authenicated,
+        access: state.user.access
     };
 }
 

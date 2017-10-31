@@ -36,10 +36,9 @@ export class Login extends Component {
     		body: form
     	}).then((res) => res.json())
     		.then((json) => {
-    			console.log(json);
     			if (json.message == 'success') {
+    					this.hasAccess();
 						this.props.onLogin(json.token);
-						this.hasAccess();
     			} else {
 						this.setState({authError:true, errors:json.errors});
 					}
@@ -92,7 +91,8 @@ function ErrorMsg(props){
 
 function mapStateToProps (state) {
     return {
-        authenticated: state.user.authenicated
+        authenticated: state.user.authenticated,
+        access: state.user.access
     };
 }
 

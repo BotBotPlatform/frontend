@@ -1,11 +1,15 @@
 import { loadCookie } from '../utils/cookies';
 
 export default function apiService(endpoint, options = {}) {
+	console.log(loadCookie('token'));
 	options.headers = {
-		"Authorization": "Bearer "+ loadCookie('token')
+		"Authorization": "Bearer " + loadCookie('token')
 	};
 
 	const base_url = 'https://botbot.jakebrabec.me/api';
+
+	console.log(`${base_url}/${endpoint}`)
+	console.log(options);
 
 	return fetch(`${base_url}/${endpoint}`, options);
 }

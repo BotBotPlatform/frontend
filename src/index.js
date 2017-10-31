@@ -23,8 +23,10 @@ function hasAccess() {
         	.then((json) => { if (json['facebook_token']) { store.dispatch(registerAccessToken()); }});
 };
     
-if (token) store.dispatch(loginFromJWT(token));
 hasAccess();
+
+if (token) store.dispatch(loginFromJWT(token));
+
 
 
 ReactDOM.render((

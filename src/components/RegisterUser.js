@@ -4,7 +4,7 @@ import ProgressBar from './ProgressBar';
 import '../assets/register.css';
 import logo from '../assets/botbot-logo.png';
 import apiService from '../actions/index.js';
-import { loginFromJWT, registerUser } from '../actions/users';
+import { loginFromJWT, registerUser, registerAccessToken } from '../actions/users';
 import { withRouter} from 'react-router-dom';
 import { setCookie } from '../utils/cookies';
 
@@ -18,6 +18,13 @@ export class RegisterUser extends Component {
 			errors: null
 		};
     }
+
+    hasAccess() {
+		var access = false;
+	    apiService('user/token', { method: 'GET' })
+	    	.then((res) => res.json())
+	        	.then((json) => { if (json['facebook_token']) { console.log('here'); this.props.onRegisterAccess(); }});
+	}
 
 	handleRegister = (data) => {
     	data.preventDefault();
@@ -86,13 +93,18 @@ function ErrorMsg(props){
 
 function mapStateToProps (state) {
     return {
-        registered: state.user.registered
+        registered: state.user.registered,
+        access: state.user.access,
+        authenticated: state.user.authenticated
     };
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	registerUser: (token) => {
 	        dispatch(registerUser(token));
+	},
+	onRegisterAccess() {
+		dispatch(registerAccessToken());
 	}
 });
 
