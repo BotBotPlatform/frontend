@@ -123,8 +123,8 @@ export class Feedback extends Component {
                         }, this)}
                     </ul>
 				    <form onSubmit={this.addFeedbackCategory}>
-					    <input className="feedback-input" type="text" name="feedback" placeholder="Feedback Category" ref="feedbackCategory" /><br/>
-					    <input className="add-button" type="submit" value="Add +" />
+					    <input className="feedback-input" type="text" name="feedback" placeholder="New Feedback Category" ref="feedbackCategory" />
+					    <input className="add-button" type="submit" value="+" />
 				    </form>
 			    </div>
 

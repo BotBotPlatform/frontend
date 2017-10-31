@@ -62,8 +62,48 @@
 			margin-left: 1.5em;
 			padding: 1em 0;
 		}
-
 	}
+
+	input.feedback-input {
+         color: #858585;
+         border: 0;
+         border-bottom: 3px solid #E7E7E7;
+         font-family: 'Fira Sans', sans-serif;
+         padding: 0.75em 0;
+         font-size: 0.8em;
+         margin-bottom: 1.2em;
+         font-weight: 400;
+         width: 45%;
+         &::placeholder {
+            color: #858585;
+            font-weight: 300;
+        }
+        &:focus {
+        	outline: none;
+        }
+	}
+
+	input.add-button {
+         color: #f9f9f9;
+         border: 0;
+         font-family: 'Fira Sans', sans-serif;
+         padding: 0.2em 0.7em;
+         font-size: 1.2em;
+         border-radius: 5em;
+         background-color: #858585;
+         &::placeholder {
+            color: #858585;
+            font-weight: 300;
+        }
+        &:hover {
+        	cursor: pointer;
+        	background-color: #89b8fc;
+        }
+        &:focus {
+        	outline: none;
+        }
+	}
+
 	.clear {
 		clear: both;
 	}
