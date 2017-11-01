@@ -128,7 +128,7 @@ export class Feedback extends Component {
 				    </form>
 			    </div>
 
-			    <a href="#" onClick={this.handleLogout}>Logout</a><br/>
+                <a href="./dashboard">Dashboard</a><br/>
 
                 </div>
                 </div>

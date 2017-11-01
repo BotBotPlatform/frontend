@@ -11,6 +11,23 @@ export class Dashboard extends Component {
         super(props);
     }
 
+    componentWillMount() {
+    	this.getActiveFeatures();
+    	apiService('bot', {
+            method: 'GET'
+        }).then((res) => res.json())
+            .then((json) => {
+                if (json.message === 'success') {
+                	console.log(json);
+                }
+        })
+
+    }
+
+    getActiveFeatures() {
+
+    }
+
 	handleLogout = (e) => {
 		e.preventDefault();
 		this.props.logoutUser();
@@ -40,14 +57,22 @@ export class Dashboard extends Component {
 
 	render () {
 		return (
-			<div>
+			<div style={{height: '100%'}}>
     			<ProgressBar progress='100' />
-    			Dashboard<br/><br/>
-				<button onClick={this.createBot}>Create bot</button><br/>
-				<button onClick={this.botInfo}>Get Bot Info</button><br/>
-				<button onClick={this.deleteBot}>Delete bot</button><br/>
-    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
-    			<a href="./dashboard/feedback">Feedback</a>
+    			<div id="features">
+    				<h3>Dashboard</h3><br/>
+    				<div id="feature-set">
+    					<div className="feature active"><a href="./dashboard/feedback">Feedback</a></div>
+    					<div className="feature">Appointments</div>
+    					<div className="feature">Inventory</div>
+    					<div className="feature">Support</div>
+    				</div>
+					
+					<button onClick={this.createBot}>Create bot</button>
+					<button onClick={this.botInfo}>Get Bot Info</button>
+					<button onClick={this.deleteBot}>Delete bot</button><br/>
+	    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
+		    		</div>	
   			</div>
 		);
 	}
