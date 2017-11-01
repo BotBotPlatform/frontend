@@ -30,6 +30,7 @@ export class RegisterSetup extends Component {
 	    	.then((res) => res.json())
 	        	.then((json) => { 
 	        		if (json['bot']) {
+	        			console.log(json['bot']);
 	        			var botURL = 'https://botbot.jakebrabec.me/Facebook/' + json['bot']['uuid'];
 	        			that.setState({webhookURL: botURL});
 	        		} else {

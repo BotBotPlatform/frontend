@@ -28,7 +28,6 @@ export class RegisterUser extends Component {
 
 	handleRegister = (data) => {
     	data.preventDefault();
-    	console.log(data);
     	let form = new FormData();
     	form.append('email', data.target.email.value);
     	form.append('password', data.target.password.value); 

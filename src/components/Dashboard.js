@@ -63,7 +63,7 @@ export class Dashboard extends Component {
     				<h3>Dashboard</h3><br/>
     				<div id="feature-set">
     					<div className="feature active"><a href="./dashboard/feedback">Feedback</a></div>
-    					<div className="feature">Appointments</div>
+    					<div className="feature"><a href="./dashboard/appointments">Appointments</a></div>
     					<div className="feature">Inventory</div>
     					<div className="feature">Support</div>
     				</div>

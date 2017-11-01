@@ -83,6 +83,41 @@
       background-color: #89b8fc; }
     #dashboard input.add-button:focus {
       outline: none; }
+  #dashboard .apt-prompt {
+    font-size: 0.75em;
+    color: #858585; }
+  #dashboard input.end, #dashboard input.start {
+    border: 0;
+    border-bottom: 2px solid #eee;
+    padding: 5px;
+    font-size: .75em; }
+    #dashboard input.end:focus, #dashboard input.start:focus {
+      outline: 0; }
+  #dashboard input.submitTime {
+    background: #89b8fc;
+    border: 0;
+    font-family: 'Fira Sans', sans-serif;
+    color: #f9f9f9;
+    font-size: 0.5em;
+    border-radius: 2em;
+    margin-left: 15px;
+    padding: 1.2em 2em; }
+    #dashboard input.submitTime:hover {
+      background-color: #86f7eb;
+      cursor: pointer; }
+    #dashboard input.submitTime:focus {
+      outline: 0; }
+  #dashboard input.inactiveSubmitTime {
+    background: #e7e7e7;
+    border: 0;
+    font-family: 'Fira Sans', sans-serif;
+    color: #858585;
+    font-size: 0.5em;
+    border-radius: 2em;
+    margin-left: 15px;
+    padding: 1.2em 2em; }
+    #dashboard input.inactiveSubmitTime:focus {
+      outline: 0; }
   #dashboard .clear {
     clear: both; }
 

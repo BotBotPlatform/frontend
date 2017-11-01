@@ -108,6 +108,53 @@
         }
 	}
 
+	.apt-prompt {
+		font-size: 0.75em;
+		color: #858585;
+	}
+
+	input.end, input.start {
+		border: 0;
+		border-bottom: 2px solid #eee;
+		padding: 5px;
+		font-size: .75em;
+		&:focus {
+			outline: 0;
+		}
+	}
+
+	input.submitTime {
+		background: #89b8fc;
+		border: 0;
+		font-family: 'Fira Sans', sans-serif;
+		color: #f9f9f9;
+        font-size: 0.5em;
+        border-radius: 2em;
+        margin-left: 15px;
+        padding: 1.2em 2em;
+		&:hover {
+		    	background-color: #86f7eb;
+		    	cursor: pointer;
+		}
+		&:focus {
+			outline: 0;
+		}
+	}
+
+	input.inactiveSubmitTime {
+		background: #e7e7e7;
+		border: 0;
+		font-family: 'Fira Sans', sans-serif;
+		color: #858585;
+        font-size: 0.5em;
+        border-radius: 2em;
+        margin-left: 15px;
+        padding: 1.2em 2em;
+        &:focus {
+        	outline: 0;
+        }
+	}
+
 	.clear {
 		clear: both;
 	}

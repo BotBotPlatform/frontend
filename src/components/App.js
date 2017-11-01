@@ -6,6 +6,7 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import Feedback from './Feedback';
 import PassReset from './PasswordReset';
+import Appointments from './Appointments';
 import { connect } from 'react-redux';
 import AdminPanel from './AdminPanel';
 
@@ -31,9 +32,22 @@ const PublicRoute = ({ component: Component, isAuthenticated, ...rest }) => (
     )}/>
 );
 
+const SpecialRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+    <Route {...rest} render={props => (
+        !isAuthenticated ? (<Component {...props}/>) : (
+            <Redirect to={{
+                pathname: '/dashboard',
+                state: { from: props.location }
+            }}/>
+        )
+    )}/>
+);
+
 
 const UserRoute = withRouter(connect((state) => ({isAuthenticated: state.user.authenticated }))(PrivateRoute));
 const AuthRoute = withRouter(connect((state) => ({isAuthenticated: state.user.authenticated && state.user.access }))(PublicRoute));
+const AdminRoute = withRouter(connect((state) => ({isAuthenticated: state.user.authenticated}))(SpecialRoute));
+
 
 const App = () => (
   <div>
@@ -42,8 +56,9 @@ const App = () => (
       <AuthRoute path="/passreset" component={PassReset}/>
       <AuthRoute path="/login" component={Login}/>
       <AuthRoute path="/register" component={Register}/>
-      <AuthRoute path="/admin" component={AdminPanel}/>
+      <AdminRoute path="/admin" component={AdminPanel}/>
       <UserRoute path="/dashboard/feedback" component={Feedback} />
+      <UserRoute path="/dashboard/appointments" component={Appointments} />
       <Redirect from="*" to="/"/>
     </Switch>
   </div>
