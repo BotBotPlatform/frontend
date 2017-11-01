@@ -192,9 +192,24 @@
 			font-size: 1.3em;
 			font-weight: 600;
 			color: #858585;
+			a {
+				color: #858585;
+				text-decoration: none;
+				&:hover {
+					color: #658ac0;
+				}
+			}
 			&.active {
 				background-color: #89b8fc;
 				color: #FBFEFF; 
+
+				a {
+					color: #FBFEFF;
+					text-decoration: none;
+					&:hover {
+						color: #658ac0;
+					}
+				}
 			}
 			@media (max-width: 900px) {
 				width: 45%;
@@ -202,13 +217,7 @@
 			@media (max-width: 480px) {
 				width: 100%;
 			}
-			a {
-				color: #FBFEFF;
-				text-decoration: none;
-				&:hover {
-					color: #658ac0;
-				}
-			}
+			
 		}
 		
 	}

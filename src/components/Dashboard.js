@@ -9,6 +9,12 @@ export class Dashboard extends Component {
 
 	constructor (props) {
         super(props);
+        this.state = {
+        	feedback: false,
+        	appointments: false,
+        	inventory: false,
+        	support: false
+        } 
     }
 
     componentWillMount() {
@@ -18,7 +24,10 @@ export class Dashboard extends Component {
         }).then((res) => res.json())
             .then((json) => {
                 if (json.message === 'success') {
-                	console.log(json);
+                	if (json.bot['feedback_enabled']) this.setState({feedback: true});
+                	if (json.bot['reservations_enabled']) this.setState({appointments: true});
+                	if (json.bot['shopify_enabled']) this.setState({inventory: true});
+                	if (json.bot['customer_support_enabled']) this.setState({support: true});
                 }
         })
 
@@ -62,10 +71,10 @@ export class Dashboard extends Component {
     			<div id="features">
     				<h3>Dashboard</h3><br/>
     				<div id="feature-set">
-    					<div className="feature active"><a href="./dashboard/feedback">Feedback</a></div>
-    					<div className="feature"><a href="./dashboard/appointments">Appointments</a></div>
-    					<div className="feature">Inventory</div>
-    					<div className="feature">Support</div>
+    					<div className={this.state.feedback ? 'feature active' : 'feature inactive'}><a href="./dashboard/feedback">Feedback</a></div>
+    					<div className={this.state.appointments ? 'feature active' : 'feature inactive'}><a href="./dashboard/appointments">Appointments</a></div>
+    					<div className={this.state.inventory ? 'feature active' : 'feature inactive'}>Inventory</div>
+    					<div className={this.state.support ? 'feature active' : 'feature inactive'}>Support</div>
     				</div>
 					
 					<button onClick={this.createBot}>Create bot</button>

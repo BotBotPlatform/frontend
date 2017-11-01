@@ -8,7 +8,6 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const ACCESS_SUCCESS = 'ACCESS_SUCCESS';
 
 export function loginFromJWT (token) {
-    console.log(token);
 	setCookie('token', token, {path: '/'});
     return saveToken(token);
 }

@@ -44,6 +44,7 @@ export class Feedback extends Component {
                 }
         })
 
+        this.toggleAppointments(1);
     }
 
     getTime = (str) => {
@@ -115,6 +116,19 @@ export class Feedback extends Component {
         window.open(this.state.url);
     }
 
+    toggleAppointments(enabled) {
+        let form = new FormData();
+        form.append('feature_name', 'reservations_enabled');
+        form.append('enabled', enabled);
+
+        apiService('bot/toggleFeature', {
+            method: 'POST',
+            body: form
+        }).then((res) => {
+            if (!enabled) this.props.history.push('/dashboard');
+        });
+    }
+
 	render () {
 		return (
 			<div style={{height: '100%'}}>
@@ -130,8 +144,8 @@ export class Feedback extends Component {
                      <button className="exportCalendar" onClick={() => this.getCalendarExport()} >Get Exported Calendar</button><br/>
 
 			 
-
-                <a href="./dashboard">Dashboard</a><br/>
+                     <button onClick={() => this.toggleAppointments(0)}>Disable Appointments</button><br/>
+                     <a href="./dashboard">Dashboard</a><br/>
 
                 </div>
                 </div>

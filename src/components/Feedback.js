@@ -39,6 +39,8 @@ export class Feedback extends Component {
                 	}
                 }
         })
+
+        this.toggleFeedback(1);
 	}
 
 	addFeedbackCategory = (data) => {
@@ -98,6 +100,19 @@ export class Feedback extends Component {
         })
     }
 
+    toggleFeedback(enabled) {
+        let form = new FormData();
+        form.append('feature_name', 'feedback_enabled');
+        form.append('enabled', enabled);
+
+        apiService('bot/toggleFeature', {
+            method: 'POST',
+            body: form
+        }).then((res) => {
+            if (!enabled) this.props.history.push('/dashboard');
+        });
+    }
+
 	render () {
 		return (
 			<div style={{height: '100%'}}>
@@ -128,6 +143,7 @@ export class Feedback extends Component {
 				    </form>
 			    </div>
 
+                <button onClick={() => this.toggleFeedback(0)}>Disable Feedback</button><br/>
                 <a href="./dashboard">Dashboard</a><br/>
 
                 </div>

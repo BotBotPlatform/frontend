@@ -150,17 +150,22 @@
       font-size: 1.3em;
       font-weight: 600;
       color: #858585; }
+      #features #feature-set .feature a {
+        color: #858585;
+        text-decoration: none; }
+        #features #feature-set .feature a:hover {
+          color: #658ac0; }
       #features #feature-set .feature.active {
         background-color: #89b8fc;
         color: #FBFEFF; }
+        #features #feature-set .feature.active a {
+          color: #FBFEFF;
+          text-decoration: none; }
+          #features #feature-set .feature.active a:hover {
+            color: #658ac0; }
       @media (max-width: 900px) {
         #features #feature-set .feature {
           width: 45%; } }
       @media (max-width: 480px) {
         #features #feature-set .feature {
           width: 100%; } }
-      #features #feature-set .feature a {
-        color: #FBFEFF;
-        text-decoration: none; }
-        #features #feature-set .feature a:hover {
-          color: #658ac0; }

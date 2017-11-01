@@ -24,7 +24,6 @@ export class RegisterPageAccessToken extends Component {
     		body: form
     	}).then((res) => res.json())
     		.then((json) => {
-    			console.log(json);
     			if (json.message == 'success') {
     				this.props.registerAccessToken(); 
     				this.props.loginFromJWT(loadCookie('token')); 
