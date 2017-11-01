@@ -54,42 +54,50 @@ export class Dashboard extends Component {
 		b.preventDefault();
 		return apiService('bot',{
 			method: 'GET'
-		})
+		}).then((res)=>res.json())
+			.then((json) => {
+				console.log(json)
+			})
 	}
 
 	spinUpBot = (b) => {
 		b.preventDefault();
 		return apiService('bot/spinUp',{
 			method:'POST'
-		})
-	}
-
-	spinUpBot = (b) => {
-		b.preventDefault();
-		return apiService('bot/spinUp',{
-			method:'POST'
-		})
+		}).then((res)=>res.json())
+			.then((json) => {
+				console.log(json)
+			})
 	}
 
 	restartBot = (b) => {
 		b.preventDefault();
-		return apiService('bot/restartBot',{
+		return apiService('bot/reloadBot',{
 			method:'POST'
-		})
+		}).then((res)=>res.json())
+			.then((json) => {
+				console.log(json)
+			})
 	}
 
 	shutdownBot = (b) => {
 		b.preventDefault();
 		return apiService('bot/shutDown',{
 			method:'POST'
-		})
+		}).then((res)=>res.json())
+			.then((json) => {
+				console.log(json)
+			})
 	}
 
 	deleteBot = (b) => {
 		b.preventDefault();
 		return apiService('bot',{
 			method: 'DELETE'
-		})
+		}).then((res)=>res.json())
+			.then((json) => {
+				console.log(json)
+			})
 	}
 
 	render () {
@@ -109,7 +117,7 @@ export class Dashboard extends Component {
 					<button onClick={this.botInfo}>Get Bot Info</button>
 					<button onClick={this.deleteBot}>Delete bot</button>
 					<button onClick={this.spinUpBot}>Start bot</button>
-					<button onClick={this.resetBot}>Restart bot</button>
+					<button onClick={this.restartBot}>Restart bot</button>
 					<button onClick={this.shutdownBot}>Shutdown bot</button><br/>
 	    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
 		    		</div>	
