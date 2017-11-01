@@ -14,7 +14,9 @@ export class Feedback extends Component {
             startTime: '00:00',
             endTime: '00:00',
             appointments: [],
-            changePending: false
+            changePending: false,
+            uuid: '',
+            url: ''
         }
     }
 
@@ -26,10 +28,22 @@ export class Feedback extends Component {
                 if (json.message === 'success') {
                     var min = this.getTime(json['min_hour'].toString());
                     var max = this.getTime(json['max_hour'].toString());
-                    this.setState({ startTime: min });
-                    this.setState({ endTime: max });
+                    this.setState({startTime: min});
+                    this.setState({endTime: max});
                 }
         })
+
+        apiService('bot', {
+            method: 'GET'
+        }).then((res) => res.json())
+            .then((json) => {
+                if (json.message === 'success') {
+                    this.setState({uuid: json['bot']['uuid'].toString()});
+                    this.getCalendar();
+
+                }
+        })
+
     }
 
     getTime = (str) => {
@@ -90,6 +104,17 @@ export class Feedback extends Component {
         })
     }
 
+    getCalendar() {
+        let uri = 'appointment/calendar/' + this.state.uuid;
+        apiService(uri, {
+            method: 'GET'
+        }).then((res) => this.setState({url: res.url})) 
+    }
+
+    getCalendarExport() {
+        window.open(this.state.url);
+    }
+
 	render () {
 		return (
 			<div style={{height: '100%'}}>
@@ -101,6 +126,8 @@ export class Feedback extends Component {
                      <input type="time" className="end" onChange={this.changeEnd.bind(this)} value={this.state.endTime}/>
 
                      <input type="submit" className={this.state.changePending ? "submitTime" : "inactiveSubmitTime"} value="Change Availability" onClick={() =>this.changeAvailability(this.state.changePending)} /><br/>
+
+                     <button className="exportCalendar" onClick={() => this.getCalendarExport()} >Get Exported Calendar</button><br/>
 
 			 
 
