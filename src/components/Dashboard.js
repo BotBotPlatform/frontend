@@ -57,6 +57,34 @@ export class Dashboard extends Component {
 		})
 	}
 
+	spinUpBot = (b) => {
+		b.preventDefault();
+		return apiService('bot/spinUp',{
+			method:'POST'
+		})
+	}
+
+	spinUpBot = (b) => {
+		b.preventDefault();
+		return apiService('bot/spinUp',{
+			method:'POST'
+		})
+	}
+
+	restartBot = (b) => {
+		b.preventDefault();
+		return apiService('bot/restartBot',{
+			method:'POST'
+		})
+	}
+
+	shutdownBot = (b) => {
+		b.preventDefault();
+		return apiService('bot/shutDown',{
+			method:'POST'
+		})
+	}
+
 	deleteBot = (b) => {
 		b.preventDefault();
 		return apiService('bot',{
@@ -79,7 +107,10 @@ export class Dashboard extends Component {
 					
 					<button onClick={this.createBot}>Create bot</button>
 					<button onClick={this.botInfo}>Get Bot Info</button>
-					<button onClick={this.deleteBot}>Delete bot</button><br/>
+					<button onClick={this.deleteBot}>Delete bot</button>
+					<button onClick={this.spinUpBot}>Start bot</button>
+					<button onClick={this.resetBot}>Restart bot</button>
+					<button onClick={this.shutdownBot}>Shutdown bot</button><br/>
 	    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
 		    		</div>	
   			</div>

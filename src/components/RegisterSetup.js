@@ -31,14 +31,14 @@ export class RegisterSetup extends Component {
 	        	.then((json) => { 
 	        		if (json['bot']) {
 	        			console.log(json['bot']);
-	        			var botURL = 'https://botbot.jakebrabec.me/Facebook/' + json['bot']['uuid'];
+	        			var botURL = 'https://botbot.jakebrabec.me/api/facebook/' + json['bot']['uuid'];
 	        			that.setState({webhookURL: botURL});
 	        		} else {
 	        			apiService('bot', { method: 'POST' })
 				    	.then((res) => res.json())
 				        	.then((json) => { 
 				        		if (json['message'] === 'success') {
-				        			var botURL = 'https://botbot.jakebrabec.me/Facebook/' + json['bot']['uuid'];
+				        			var botURL = 'https://botbot.jakebrabec.me/api/facebook/' + json['bot']['uuid'];
 	        						that.setState({webhookURL: botURL});
 				        		}
 				        	});
