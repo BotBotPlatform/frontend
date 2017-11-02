@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 import apiService from '../actions/index.js';
 import { logoutUser } from '../actions/users';
-import statusicon_dead from '../assets/statusicon_dead.png';
-import statusicon_loading from '../assets/statusicon_loading.png';
-import statusicon_alive from '../assets/statusicon_alive.png';
-
 
 export class Dashboard extends Component {
 
@@ -17,7 +13,7 @@ export class Dashboard extends Component {
         	appointments: false,
         	inventory: false,
         	support: false,
-					botstatus: 'loading',
+			botStatus: 'loading',
         }
     }
 
@@ -33,9 +29,9 @@ export class Dashboard extends Component {
 	                	if (json.bot['reservations_enabled']) this.setState({appointments: true});
 	                	if (json.bot['shopify_enabled']) this.setState({inventory: true});
 										if (json.bot['customer_support_enabled']) this.setState({support: true});
-										if (json.bot['deploy_status']) this.setState({botstatus: json.bot['deploy_status']});
+										if (json.bot['deploy_status']) this.setState({botStatus: json.bot['deploy_status']});
 									} else {
-										if (json.bot['deploy_status']) this.setState({botstatus: 'no_bot_exists'});
+										if (json.bot['deploy_status']) this.setState({botStatus: 'no_bot_exists'});
 									}
 
                 }
@@ -72,42 +68,42 @@ export class Dashboard extends Component {
 
 	spinUpBot = (b) => {
 		b.preventDefault();
-		this.setState({botstatus: 'loading'});
+		this.setState({botStatus: 'loading'});
 		return apiService('bot/spinUp',{
 			method:'POST'
 		}).then((res)=>res.json())
 			.then((json) => {
 				setTimeout(() => {
-					this.setState({botstatus: 'alive'});
-				},3000);
+					this.setState({botStatus: 'alive'});
+				},2500);
 			})
 	}
 
 	restartBot = (b) => {
 		b.preventDefault();
-		this.setState({botstatus: 'loading'});
+		this.setState({botStatus: 'loading'});
 		return apiService('bot/reloadBot',{
 			method:'POST'
 		}).then((res)=>res.json())
 			.then((json) => {
 				console.log(json)
 				setTimeout(() => {
-					this.setState({botstatus: 'alive'});
-				},4000);
+					this.setState({botStatus: 'alive'});
+				},2000);
 			})
 	}
 
 	shutdownBot = (b) => {
 		b.preventDefault();
-		this.setState({botstatus: 'loading'});
+		this.setState({botStatus: 'loading'});
 		return apiService('bot/shutDown',{
 			method:'POST'
 		}).then((res)=>res.json())
 			.then((json) => {
 				console.log(json)
 				setTimeout(() => {
-					this.setState({botstatus: 'offline'});
-				},3000);
+					this.setState({botStatus: 'offline'});
+				},1500);
 			})
 	}
 
@@ -122,21 +118,6 @@ export class Dashboard extends Component {
 	}
 
 	render () {
-		var statusIcon;
-		switch(this.state.botstatus) {
-			case "loading":
-				statusIcon = <img src={statusicon_loading}/>
-				break;
-			case "alive":
-				statusIcon = <img src={statusicon_alive}/>
-				break;
-			case "offline":
-				statusIcon = <img src={statusicon_dead}/>
-				break;
-			case "failed":
-				statusIcon = <img src={statusicon_dead}/>
-				break;
-		}
 		return (
 			<div style={{height: '100%'}}>
     			<ProgressBar progress='100' />
@@ -155,7 +136,7 @@ export class Dashboard extends Component {
 					<button onClick={this.spinUpBot}>Start bot</button>
 					<button onClick={this.restartBot}>Restart bot</button>
 					<button onClick={this.shutdownBot}>Shutdown bot</button><br/>
-					<p>Bot Health: {statusIcon}</p>
+					<p className="status-text">Bot Health <div id="status" className={this.state.botStatus}></div></p>
 
 	    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
 		    		</div>

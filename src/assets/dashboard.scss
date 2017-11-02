@@ -172,6 +172,31 @@
 	margin: 0 auto;
 	width: 60%;
 
+	#status {
+		height: 24px;
+		width: 24px;
+		border-radius: 12px;
+	}
+
+	.loading {
+		background-color: #fbc34c;
+	}
+	.alive {
+		background-color: #57e583;
+	}
+	.offline {
+		background-color: #fa4646;
+	}
+	.failed {
+		background-color: #fa4646;
+	}
+
+	.status-text {
+		font-size: 0.7em;
+		padding-top: 10px;
+		color: #858585;
+	}
+
 	h3 {
 		color: #acacac;
 		text-align: center;

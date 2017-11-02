@@ -130,6 +130,22 @@
   padding: 0;
   margin: 0 auto;
   width: 60%; }
+  #features #status {
+    height: 24px;
+    width: 24px;
+    border-radius: 12px; }
+  #features .loading {
+    background-color: #fbc34c; }
+  #features .alive {
+    background-color: #57e583; }
+  #features .offline {
+    background-color: #fa4646; }
+  #features .failed {
+    background-color: #fa4646; }
+  #features .status-text {
+    font-size: 0.7em;
+    padding-top: 10px;
+    color: #858585; }
   #features h3 {
     color: #acacac;
     text-align: center;
