@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 import apiService from '../actions/index.js';
 import { logoutUser } from '../actions/users';
+import statusicon_dead from '../assets/statusicon_dead.png';
+import statusicon_loading from '../assets/statusicon_loading.png';
+import statusicon_alive from '../assets/statusicon_alive.png';
 
 
 export class Dashboard extends Component {
@@ -13,8 +16,9 @@ export class Dashboard extends Component {
         	feedback: false,
         	appointments: false,
         	inventory: false,
-        	support: false
-        } 
+        	support: false,
+					botstatus: 'loading',
+        }
     }
 
     componentWillMount() {
@@ -24,10 +28,16 @@ export class Dashboard extends Component {
         }).then((res) => res.json())
             .then((json) => {
                 if (json.message === 'success') {
-                	if (json.bot['feedback_enabled']) this.setState({feedback: true});
-                	if (json.bot['reservations_enabled']) this.setState({appointments: true});
-                	if (json.bot['shopify_enabled']) this.setState({inventory: true});
-                	if (json.bot['customer_support_enabled']) this.setState({support: true});
+									if(json.bot) {
+										if (json.bot['feedback_enabled']) this.setState({feedback: true});
+	                	if (json.bot['reservations_enabled']) this.setState({appointments: true});
+	                	if (json.bot['shopify_enabled']) this.setState({inventory: true});
+										if (json.bot['customer_support_enabled']) this.setState({support: true});
+										if (json.bot['deploy_status']) this.setState({botstatus: json.bot['deploy_status']});
+									} else {
+										if (json.bot['deploy_status']) this.setState({botstatus: 'no_bot_exists'});
+									}
+
                 }
         })
 
@@ -62,31 +72,42 @@ export class Dashboard extends Component {
 
 	spinUpBot = (b) => {
 		b.preventDefault();
+		this.setState({botstatus: 'loading'});
 		return apiService('bot/spinUp',{
 			method:'POST'
 		}).then((res)=>res.json())
 			.then((json) => {
-				console.log(json)
+				setTimeout(() => {
+					this.setState({botstatus: 'alive'});
+				},3000);
 			})
 	}
 
 	restartBot = (b) => {
 		b.preventDefault();
+		this.setState({botstatus: 'loading'});
 		return apiService('bot/reloadBot',{
 			method:'POST'
 		}).then((res)=>res.json())
 			.then((json) => {
 				console.log(json)
+				setTimeout(() => {
+					this.setState({botstatus: 'alive'});
+				},4000);
 			})
 	}
 
 	shutdownBot = (b) => {
 		b.preventDefault();
+		this.setState({botstatus: 'loading'});
 		return apiService('bot/shutDown',{
 			method:'POST'
 		}).then((res)=>res.json())
 			.then((json) => {
 				console.log(json)
+				setTimeout(() => {
+					this.setState({botstatus: 'offline'});
+				},3000);
 			})
 	}
 
@@ -101,6 +122,21 @@ export class Dashboard extends Component {
 	}
 
 	render () {
+		var statusIcon;
+		switch(this.state.botstatus) {
+			case "loading":
+				statusIcon = <img src={statusicon_loading}/>
+				break;
+			case "alive":
+				statusIcon = <img src={statusicon_alive}/>
+				break;
+			case "offline":
+				statusIcon = <img src={statusicon_dead}/>
+				break;
+			case "failed":
+				statusIcon = <img src={statusicon_dead}/>
+				break;
+		}
 		return (
 			<div style={{height: '100%'}}>
     			<ProgressBar progress='100' />
@@ -112,15 +148,17 @@ export class Dashboard extends Component {
     					<div className={this.state.inventory ? 'feature active' : 'feature inactive'}>Inventory</div>
     					<div className={this.state.support ? 'feature active' : 'feature inactive'}>Support</div>
     				</div>
-					
+
 					<button onClick={this.createBot}>Create bot</button>
 					<button onClick={this.botInfo}>Get Bot Info</button>
 					<button onClick={this.deleteBot}>Delete bot</button>
 					<button onClick={this.spinUpBot}>Start bot</button>
 					<button onClick={this.restartBot}>Restart bot</button>
 					<button onClick={this.shutdownBot}>Shutdown bot</button><br/>
+					<p>Bot Health: {statusIcon}</p>
+
 	    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
-		    		</div>	
+		    		</div>
   			</div>
 		);
 	}
