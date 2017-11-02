@@ -1,6 +1,7 @@
 import { loadCookie } from '../utils/cookies';
 
 export default function apiService(endpoint, options = {}) {
+	console.log(loadCookie('token'));
 	options.headers = {
 		"Authorization": "Bearer " + loadCookie('token')
 	};

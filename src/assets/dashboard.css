@@ -16,6 +16,10 @@
     text-align: center;
     font-size: 1.5em;
     margin-top: 1.5em; }
+  #dashboard h4 {
+    color: #858585;
+    font-size: 1em;
+    padding-left: 1.5em; }
   #dashboard ul.feedback-buttons {
     list-style: none;
     margin: 0;
@@ -43,11 +47,11 @@
         #dashboard ul.feedback-buttons li span:hover {
           color: #858585;
           cursor: pointer; }
-  #dashboard ul.current-feedback {
+  #dashboard ul.current-feedback, #dashboard ul.current-appointments {
     background-color: #eee;
     border-radius: 1.5em;
     padding: 1.5em; }
-    #dashboard ul.current-feedback li {
+    #dashboard ul.current-feedback li, #dashboard ul.current-appointments li {
       color: #858585;
       margin-left: 1.5em;
       padding: 1em 0; }

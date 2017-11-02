@@ -45,6 +45,66 @@ export class Feedback extends Component {
         })
 
         this.toggleAppointments(1);
+        this.getAppointments();
+    }
+
+    getAppointments() {
+        apiService('appointment', {
+            method: 'GET'
+        }).then((res) => res.json())
+            .then((json) => {
+                if (json.message === 'success') {
+                    if (json.appointments) {
+                        for (var i in json.appointments) {
+                            var a = {};
+                            a.id = json.appointments[i]["id"];
+                            var c = new Date(json.appointments[i]["timestamp"]);
+                            c.setDate(c.getDate());
+                            var d= this.getDateString(c) + c.getHours() + ':00';
+                            console.log(d);
+                            var time = this.getFormatDateString(d);
+                            a.time = time;
+                            if (a.time) {
+                                this.setState({ appointments: this.state.appointments.concat([a]) });
+
+                            }
+                        }
+                    }
+                }
+        })
+    }
+
+    getDateString = (date) => {
+      let mm = (date.getMonth() + 1).toString();
+      mm = mm.length < 2 ? '0' + mm : mm;
+
+      let dd = (date.getDate() + 1).toString();
+      dd = dd.length < 2 ? '0' + dd : dd;
+
+      let yyyy = date.getFullYear().toString();
+
+      return mm + '/' + dd + '/' + yyyy + ':';
+    }
+
+    getFormatDateString = (str) => {
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+      ];
+
+      var day = str.substr(0, str.indexOf(':'));
+      var time = str.substr(str.indexOf(':')+1, str.length - 1);
+
+
+      var d = new Date(day);
+      d.setDate(d.getDate() - 2);
+      var t = parseInt(time.substr(0, time.indexOf(':')));
+      var pm = false;
+      pm = (t > 12) ? true : false;
+      t = (t > 12) ? (t-12) : t;
+
+      var dateString = monthNames[d.getMonth()] + ' ' + d.getDay() + ', ' + d.getFullYear() + ' at ' + t + (pm ? 'pm' : 'am');
+      
+      return dateString;
     }
 
     getTime = (str) => {
@@ -54,25 +114,6 @@ export class Feedback extends Component {
 
     getHours = (str) => {
         return str.split(':')[0];
-    }
-
-    getDateString = (date, hours) => {
-        let mm = (date.getMonth() + 1).toString();
-        mm = mm.length < 2 ? '0' + mm : mm;
-
-        let dd = date.getDate().toString();
-        dd = dd.length < 2 ? '0' + dd : dd;
-
-        let yyyy = date.getFullYear().toString();
-
-        let hh = hours;
-        hh = hh.length < 2 ? '0' + hh : hh;
-
-        return mm + '/' + dd + '/' + yyyy + ':' + hh + ':00';
-    }
-
-    getDate = (str) => {
-        return this.getDateString(new Date(), this.getHours(str));
     }
 
     changeStart = (e) => {
@@ -140,6 +181,15 @@ export class Feedback extends Component {
                      <input type="time" className="end" onChange={this.changeEnd.bind(this)} value={this.state.endTime}/>
 
                      <input type="submit" className={this.state.changePending ? "submitTime" : "inactiveSubmitTime"} value="Change Availability" onClick={() =>this.changeAvailability(this.state.changePending)} /><br/>
+
+                     <h4>Scheduled</h4>
+                    <ul className={(this.state.appointments.length > 0) ? "current-appointments" : "hidden"}>
+                        {this.state.appointments.map(function(obj, index){
+                            return (
+                                <li key={obj.id}>{obj.time}</li>
+                            );
+                        }, this)}
+                    </ul>
 
                      <button className="exportCalendar" onClick={() => this.getCalendarExport()} >Get Exported Calendar</button><br/>
 
