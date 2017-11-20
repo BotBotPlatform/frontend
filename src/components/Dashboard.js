@@ -127,7 +127,7 @@ export class Dashboard extends Component {
     					<div className={this.state.feedback ? 'feature active' : 'feature inactive'}><a href="./dashboard/feedback">Feedback</a></div>
     					<div className={this.state.appointments ? 'feature active' : 'feature inactive'}><a href="./dashboard/appointments">Appointments</a></div>
     					<div className={this.state.inventory ? 'feature active' : 'feature inactive'}>Inventory</div>
-    					<div className={this.state.support ? 'feature active' : 'feature inactive'}>Support</div>
+    					<div className={this.state.support ? 'feature active' : 'feature inactive'}><a href="./dashboard/support">Support</a></div>
     				</div>
 
 					<button onClick={this.createBot}>Create bot</button>
