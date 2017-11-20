@@ -6,6 +6,7 @@ import Register from './Register';
 import Dashboard from './Dashboard';
 import Feedback from './Feedback';
 import Support from './Support';
+import Inventory from './Inventory';
 import PassReset from './PasswordReset';
 import Appointments from './Appointments';
 import { connect } from 'react-redux';
@@ -60,6 +61,7 @@ const App = () => (
       <AdminRoute path="/admin" component={AdminPanel}/>
       <UserRoute path="/dashboard/feedback" component={Feedback} />
       <UserRoute path="/dashboard/support" component={Support} />
+      <UserRoute path="/dashboard/inventory" component={Inventory} />
       <UserRoute path="/dashboard/appointments" component={Appointments} />
       <Redirect from="*" to="/"/>
     </Switch>
