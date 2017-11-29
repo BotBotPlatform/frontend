@@ -58,15 +58,23 @@ export class Inventory extends Component {
 			<div style={{height: '100%'}}>
 			    <ProgressBar progress='100' />
 
-                <div className="login-form">
-		        	<form onSubmit={this.handleInventoryURL}>
-					  http://etsy.com/shop/<input className="url-input" type="text" name="shop" placeholder="Etsy Shop Name" /><br/>
-					  <input className="submit-button" type="submit" value="Save URL" />
-					</form>
-		       	</div>
+			    <div id="dashboard">
+			    <div className="row">
+			    <h3>Inventory</h3>
+			    <div className="inventory">
+	                <div className="inventory-form">
+			        	<form onSubmit={this.handleInventoryURL}>
+						  <span className="url-root">http://etsy.com/shop/</span><input className="url-input" type="text" name="shop" placeholder="Etsy Shop Name" /><br/>
+						  <input className="submit-button" type="submit" value="Save URL" />
+						</form>
+			       	</div>
 
-                <button onClick={() => this.toggleFeedback(0)}>Disable Feedback</button><br/>
-                <a href="./dashboard">Dashboard</a><br/>
+
+	                <button onClick={() => this.toggleFeedback(0)}>Disable Feedback</button><br/>
+	                <a href="./dashboard">Dashboard</a><br/>
+	                </div>
+	                </div>
+                </div>
 			</div>
 		);
 	}

@@ -125,6 +125,45 @@
   #dashboard .clear {
     clear: both; }
 
+.inventory {
+  margin-top: 50px; }
+  .inventory .url-root {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 300;
+    color: #858585;
+    font-size: 0.9em;
+    border-bottom: 3px solid #E7E7E7;
+    padding: 0.75em 0; }
+  .inventory input.url-input {
+    color: #858585;
+    border: 0;
+    border-bottom: 3px solid #E7E7E7;
+    font-family: 'Fira Sans', sans-serif;
+    padding: 0.75em 0;
+    font-size: 0.9em;
+    margin-bottom: 1.2em;
+    font-weight: 400;
+    width: 45%; }
+    .inventory input.url-input::placeholder {
+      color: #858585;
+      font-weight: 400; }
+    .inventory input.url-input:focus {
+      outline: none; }
+  .inventory input.submit-button {
+    border: 0;
+    padding: 1em 2em;
+    color: #FBFEFF;
+    font-size: 0.75em;
+    font-weight: 500;
+    background: #89b8fc;
+    border-radius: 5em;
+    margin-bottom: 3em; }
+    .inventory input.submit-button:hover {
+      background-color: #858585;
+      cursor: pointer; }
+    .inventory input.submit-button:focus {
+      outline: 0; }
+
 #features {
   height: 100%;
   padding: 0;
