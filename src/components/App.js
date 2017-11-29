@@ -7,6 +7,7 @@ import Dashboard from './Dashboard';
 import Feedback from './Feedback';
 import Support from './Support';
 import Inventory from './Inventory';
+import Settings from './Settings';
 import PassReset from './PasswordReset';
 import Appointments from './Appointments';
 import { connect } from 'react-redux';
@@ -63,6 +64,7 @@ const App = () => (
       <UserRoute path="/dashboard/support" component={Support} />
       <UserRoute path="/dashboard/inventory" component={Inventory} />
       <UserRoute path="/dashboard/appointments" component={Appointments} />
+      <UserRoute path="/dashboard/settings" component={Settings} />
       <Redirect from="*" to="/"/>
     </Switch>
   </div>

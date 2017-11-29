@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 import apiService from '../actions/index.js';
 import { logoutUser } from '../actions/users';
+import FontAwesome from 'react-fontawesome';
+import '../assets/fa.css';
 
 export class Dashboard extends Component {
 
@@ -49,73 +51,7 @@ export class Dashboard extends Component {
 		this.props.history.push('/login');
 	}
 
-	createBot = (b) => {
-		b.preventDefault();
-		return apiService('bot',{
-			method: 'POST'
-		})
-	}
-
-	botInfo = (b) => {
-		b.preventDefault();
-		return apiService('bot',{
-			method: 'GET'
-		}).then((res)=>res.json())
-			.then((json) => {
-				console.log(json)
-			})
-	}
-
-	spinUpBot = (b) => {
-		b.preventDefault();
-		this.setState({botStatus: 'loading'});
-		return apiService('bot/spinUp',{
-			method:'POST'
-		}).then((res)=>res.json())
-			.then((json) => {
-				setTimeout(() => {
-					this.setState({botStatus: 'alive'});
-				},2500);
-			})
-	}
-
-	restartBot = (b) => {
-		b.preventDefault();
-		this.setState({botStatus: 'loading'});
-		return apiService('bot/reloadBot',{
-			method:'POST'
-		}).then((res)=>res.json())
-			.then((json) => {
-				console.log(json)
-				setTimeout(() => {
-					this.setState({botStatus: 'alive'});
-				},2000);
-			})
-	}
-
-	shutdownBot = (b) => {
-		b.preventDefault();
-		this.setState({botStatus: 'loading'});
-		return apiService('bot/shutDown',{
-			method:'POST'
-		}).then((res)=>res.json())
-			.then((json) => {
-				console.log(json)
-				setTimeout(() => {
-					this.setState({botStatus: 'offline'});
-				},1500);
-			})
-	}
-
-	deleteBot = (b) => {
-		b.preventDefault();
-		return apiService('bot',{
-			method: 'DELETE'
-		}).then((res)=>res.json())
-			.then((json) => {
-				console.log(json)
-			})
-	}
+	
 
 	render () {
 		return (
@@ -130,16 +66,14 @@ export class Dashboard extends Component {
     					<div className={this.state.support ? 'feature active' : 'feature inactive'}><a href="./dashboard/support">Support</a></div>
     				</div>
 
-					<button onClick={this.createBot}>Create bot</button>
-					<button onClick={this.botInfo}>Get Bot Info</button>
-					<button onClick={this.deleteBot}>Delete bot</button>
-					<button onClick={this.spinUpBot}>Start bot</button>
-					<button onClick={this.restartBot}>Restart bot</button>
-					<button onClick={this.shutdownBot}>Shutdown bot</button><br/>
+					
 					<p className="status-text">Bot Health <div id="status" className={this.state.botStatus}></div></p>
 
 	    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
 		    		</div>
+		    		<div id="navigation">
+                		<a href="./dashboard/settings"><FontAwesome className='settings-button' name='cog' size='1x' /></a>
+                	</div>
   			</div>
 		);
 	}

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 import apiService from '../actions/index.js';
 import { logoutUser } from '../actions/users';
+import FontAwesome from 'react-fontawesome';
+import '../assets/fa.css';
 import '../assets/dashboard.css';
 
 
@@ -20,12 +22,11 @@ export class Inventory extends Component {
 	}
 
 	componentWillMount() {
-		
-        this.toggleFeedback(1);
+        this.toggleInventory(1);
 	}
  
 
-    toggleFeedback(enabled) {
+    toggleInventory(enabled) {
         let form = new FormData();
         form.append('feature_name', 'shopify_enabled');
         form.append('enabled', enabled);
@@ -70,10 +71,12 @@ export class Inventory extends Component {
 			       	</div>
 
 
-	                <button onClick={() => this.toggleFeedback(0)}>Disable Feedback</button><br/>
-	                <a href="./dashboard">Dashboard</a><br/>
+	                <button onClick={() => this.toggleInventory(0)}>Disable Inventory</button><br/>
 	                </div>
 	                </div>
+                </div>
+                <div id="navigation">
+                	<a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' size='1x' /></a>
                 </div>
 			</div>
 		);

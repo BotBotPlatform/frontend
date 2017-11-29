@@ -1,0 +1,49 @@
+#settings {
+  display: flex;
+  height: 100%;
+  width: 50%;
+  padding: 0;
+  margin: 0 auto;
+  flex-direction: row;
+  text-align: center; }
+  #settings .row {
+    clear: both;
+    width: 100%; }
+  #settings h3 {
+    color: #acacac;
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 1.5em; }
+  #settings ul.settings-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none; }
+    #settings ul.settings-list li {
+      float: left;
+      flex-grow: 1;
+      text-align: center; }
+      #settings ul.settings-list li button {
+        border: 0;
+        padding: 1em 1.5em;
+        color: #FBFEFF;
+        font-size: 0.6em;
+        font-weight: 500;
+        background-color: #939393;
+        border-radius: 5em; }
+        #settings ul.settings-list li button:hover {
+          background: #89b8fc;
+          cursor: pointer; }
+        #settings ul.settings-list li button:focus {
+          outline: 0; }
+
+#navigation {
+  position: absolute;
+  left: 1em;
+  top: 1em; }
+  #navigation a {
+    border: 0;
+    color: #acacac;
+    font-size: 1em; }
+    #navigation a:hover {
+      color: #89b8fc; }

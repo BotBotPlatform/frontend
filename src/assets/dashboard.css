@@ -228,3 +228,14 @@
       @media (max-width: 480px) {
         #features #feature-set .feature {
           width: 100%; } }
+
+#navigation {
+  position: absolute;
+  left: 1em;
+  top: 1em; }
+  #navigation a {
+    border: 0;
+    color: #acacac;
+    font-size: 1em; }
+    #navigation a:hover {
+      color: #89b8fc; }

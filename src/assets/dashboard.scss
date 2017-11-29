@@ -303,3 +303,16 @@
 	}
 
 }
+#navigation {
+	position: absolute;
+	left: 1em;
+	top: 1em;
+	a {
+		border: 0;
+	    color: #acacac;
+	    font-size: 1em;
+	    &:hover {
+	    	color: #89b8fc;
+	    }
+	}
+}

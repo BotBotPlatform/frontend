@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ProgressBar from './ProgressBar';
 import apiService from '../actions/index.js';
 import { logoutUser } from '../actions/users';
+import FontAwesome from 'react-fontawesome';
+import '../assets/fa.css';
 import '../assets/dashboard.css';
 
 
@@ -195,9 +197,10 @@ export class Feedback extends Component {
 
 			 
                      <button onClick={() => this.toggleAppointments(0)}>Disable Appointments</button><br/>
-                     <a href="./dashboard">Dashboard</a><br/>
-
                 </div>
+                </div>
+                <div id="navigation">
+                    <a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' size='1x' /></a>
                 </div>
 
 			</div>
