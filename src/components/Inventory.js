@@ -12,6 +12,9 @@ export class Inventory extends Component {
 
 	constructor (props) {
         super(props);
+        this.state = {
+            botStatus: 'loading'
+        }
         
     }
 
@@ -22,6 +25,19 @@ export class Inventory extends Component {
 	}
 
 	componentWillMount() {
+        apiService('bot', {
+            method: 'GET'
+        }).then((res) => res.json())
+            .then((json) => {
+                if (json.message === 'success') {
+                    if(json.bot) {
+                        if (json.bot['deploy_status']) this.setState({botStatus: json.bot['deploy_status']});
+                    } else {
+                        if (json.bot['deploy_status']) this.setState({botStatus: 'no_bot_exists'});
+                    }
+                }
+        })
+
         this.toggleInventory(1);
 	}
  
@@ -75,8 +91,12 @@ export class Inventory extends Component {
 	                </div>
 	                </div>
                 </div>
-                <div id="navigation">
-                	<a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' size='1x' /></a>
+                <ul id="navigation">
+                    <li><a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' /></a></li>
+                    <li><a href="#" onClick={this.handleLogout}><FontAwesome className='logout-button' name='sign-out' /></a></li>
+                </ul>
+                <div title={this.state.botStatus} id="status">
+                    <FontAwesome className={this.state.botStatus} name='circle' />
                 </div>
 			</div>
 		);

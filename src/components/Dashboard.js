@@ -20,28 +20,22 @@ export class Dashboard extends Component {
     }
 
     componentWillMount() {
-    	this.getActiveFeatures();
     	apiService('bot', {
             method: 'GET'
         }).then((res) => res.json())
             .then((json) => {
                 if (json.message === 'success') {
-									if(json.bot) {
-										if (json.bot['feedback_enabled']) this.setState({feedback: true});
-	                	if (json.bot['reservations_enabled']) this.setState({appointments: true});
-	                	if (json.bot['shopify_enabled']) this.setState({inventory: true});
-										if (json.bot['customer_support_enabled']) this.setState({support: true});
-										if (json.bot['deploy_status']) this.setState({botStatus: json.bot['deploy_status']});
-									} else {
-										if (json.bot['deploy_status']) this.setState({botStatus: 'no_bot_exists'});
-									}
-
+                    if(json.bot) {
+                        if (json.bot['feedback_enabled']) this.setState({feedback: true});
+                        if (json.bot['reservations_enabled']) this.setState({appointments: true});
+                        if (json.bot['shopify_enabled']) this.setState({inventory: true});
+                        if (json.bot['customer_support_enabled']) this.setState({support: true});
+                        if (json.bot['deploy_status']) this.setState({botStatus: json.bot['deploy_status']});
+                    } else {
+                        if (json.bot['deploy_status']) this.setState({botStatus: 'no_bot_exists'});
+                    }
                 }
         })
-
-    }
-
-    getActiveFeatures() {
 
     }
 
@@ -66,14 +60,14 @@ export class Dashboard extends Component {
     					<div className={this.state.support ? 'feature active' : 'feature inactive'}><a href="./dashboard/support">Support</a></div>
     				</div>
 
-					
-					<p className="status-text">Bot Health <div id="status" className={this.state.botStatus}></div></p>
-
-	    			<a href="#" onClick={this.handleLogout}>Logout</a><br/>
 		    		</div>
-		    		<div id="navigation">
-                		<a href="./dashboard/settings"><FontAwesome className='settings-button' name='cog' size='1x' /></a>
-                	</div>
+		    		<ul id="navigation">
+                		<li><a href="./dashboard/settings"><FontAwesome className='settings-button' name='cog' /></a></li>
+                        <li><a href="#" onClick={this.handleLogout}><FontAwesome className='logout-button' name='sign-out' /></a></li>
+                	</ul>
+                    <div title={this.state.botStatus} id="status">
+                        <FontAwesome className={this.state.botStatus} name='circle' />
+                    </div>
   			</div>
 		);
 	}

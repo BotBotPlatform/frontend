@@ -18,7 +18,8 @@ export class Feedback extends Component {
             appointments: [],
             changePending: false,
             uuid: '',
-            url: ''
+            url: '',
+            botStatus: 'loading'
         }
     }
 
@@ -42,12 +43,23 @@ export class Feedback extends Component {
                 if (json.message === 'success') {
                     this.setState({uuid: json['bot']['uuid'].toString()});
                     this.getCalendar();
+                    if(json.bot) {
+                        if (json.bot['deploy_status']) this.setState({botStatus: json.bot['deploy_status']});
+                    } else {
+                        if (json.bot['deploy_status']) this.setState({botStatus: 'no_bot_exists'});
+                    }
 
                 }
         })
 
         this.toggleAppointments(1);
         this.getAppointments();
+    }
+
+    handleLogout = (e) => {
+        e.preventDefault();
+        this.props.logoutUser();
+        this.props.history.push('/login');
     }
 
     getAppointments() {
@@ -199,8 +211,12 @@ export class Feedback extends Component {
                      <button onClick={() => this.toggleAppointments(0)}>Disable Appointments</button><br/>
                 </div>
                 </div>
-                <div id="navigation">
-                    <a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' size='1x' /></a>
+                <ul id="navigation">
+                    <li><a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' /></a></li>
+                    <li><a href="#" onClick={this.handleLogout}><FontAwesome className='logout-button' name='sign-out' /></a></li>
+                </ul>
+                <div title={this.state.botStatus} id="status">
+                    <FontAwesome className={this.state.botStatus} name='circle' />
                 </div>
 
 			</div>

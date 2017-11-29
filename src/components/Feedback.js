@@ -15,7 +15,8 @@ export class Feedback extends Component {
         this.state = {
 			feedback: [],
 			newCategory: '',
-            currentFeedback: []
+            currentFeedback: [],
+            botStatus: 'loading'
 		};
     }
 
@@ -39,6 +40,19 @@ export class Feedback extends Component {
                 			this.setState({ feedback: this.state.feedback.concat([fb]) });
                 		}
                 	}
+                }
+        })
+
+        apiService('bot', {
+            method: 'GET'
+        }).then((res) => res.json())
+            .then((json) => {
+                if (json.message === 'success') {
+                    if(json.bot) {
+                        if (json.bot['deploy_status']) this.setState({botStatus: json.bot['deploy_status']});
+                    } else {
+                        if (json.bot['deploy_status']) this.setState({botStatus: 'no_bot_exists'});
+                    }
                 }
         })
 
@@ -149,8 +163,12 @@ export class Feedback extends Component {
 
                 </div>
                 </div>
-                <div id="navigation">
-                    <a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' size='1x' /></a>
+                <ul id="navigation">
+                    <li><a href="./dashboard"><FontAwesome className='back-button' name='arrow-left' /></a></li>
+                    <li><a href="#" onClick={this.handleLogout}><FontAwesome className='logout-button' name='sign-out' /></a></li>
+                </ul>
+                <div title={this.state.botStatus} id="status">
+                    <FontAwesome className={this.state.botStatus} name='circle' />
                 </div>
 
 			</div>
