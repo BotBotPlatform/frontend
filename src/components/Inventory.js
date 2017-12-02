@@ -13,7 +13,8 @@ export class Inventory extends Component {
 	constructor (props) {
         super(props);
         this.state = {
-            botStatus: 'loading'
+            botStatus: 'loading',
+            shopName: 'Etsy Shop Name'
         }
         
     }
@@ -38,6 +39,16 @@ export class Inventory extends Component {
                 }
         })
 
+        apiService('shop/name', {
+            method: 'GET'
+        }).then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                if (json.message === 'success') {
+                    this.setState({shopName: json['shop']});
+                }
+        })
+
         this.toggleInventory(1);
 	}
  
@@ -58,14 +69,15 @@ export class Inventory extends Component {
     handleInventoryURL = (data) => {
     	data.preventDefault();
     	let form = new FormData();
-    	form.append('shop', data.target.shop.value);
+        var shop = data.target.shop.value;
+    	form.append('shop', shop);
     	return apiService('shop/set', {
     		method: 'POST',
     		body: form
     	}).then((res) => res.json())
     		.then((json) => {
     			if (json.message == 'success') {
-    				console.log('WOOHOO!');
+    				this.setState({shopName: shop});
     			}
     		})
     }
@@ -81,7 +93,7 @@ export class Inventory extends Component {
 			    <div className="inventory">
 	                <div className="inventory-form">
 			        	<form onSubmit={this.handleInventoryURL}>
-						  <span className="url-root">http://etsy.com/shop/</span><input className="url-input" type="text" name="shop" placeholder="Etsy Shop Name" /><br/>
+						  <span className="url-root">http://etsy.com/shop/</span><input className="url-input" type="text" name="shop" placeholder={this.state.shopName} /><br/>
 						  <input className="submit-button" type="submit" value="Save URL" />
 						</form>
 			       	</div>
