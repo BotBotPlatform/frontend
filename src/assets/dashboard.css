@@ -47,11 +47,11 @@
         #dashboard ul.feedback-buttons li span:hover {
           color: #858585;
           cursor: pointer; }
-  #dashboard ul.current-feedback, #dashboard ul.current-appointments {
+  #dashboard ul.current-feedback, #dashboard ul.current-appointments, #dashboard ul.current-tickets {
     background-color: #eee;
     border-radius: 1.5em;
     padding: 1.5em; }
-    #dashboard ul.current-feedback li, #dashboard ul.current-appointments li {
+    #dashboard ul.current-feedback li, #dashboard ul.current-appointments li, #dashboard ul.current-tickets li {
       color: #858585;
       margin-left: 1.5em;
       padding: 1em 0; }
