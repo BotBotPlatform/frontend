@@ -20,6 +20,11 @@
     color: #858585;
     font-size: 1em;
     padding-left: 1.5em; }
+  #dashboard h5 {
+    color: #89b8fc;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 300; }
   #dashboard ul.feedback-buttons {
     list-style: none;
     margin: 0;
@@ -55,6 +60,14 @@
       color: #858585;
       margin-left: 1.5em;
       padding: 1em 0; }
+  #dashboard ul.current-tickets {
+    list-style: none; }
+    #dashboard ul.current-tickets .resolve {
+      padding-right: 10px;
+      color: #bfbfbf; }
+      #dashboard ul.current-tickets .resolve:hover {
+        cursor: pointer;
+        color: #e14f4f; }
   #dashboard input.feedback-input {
     color: #858585;
     border: 0;

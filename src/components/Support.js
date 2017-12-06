@@ -50,11 +50,11 @@ export class Support extends Component {
                     if (json.tickets) {
                         for (var i in json.tickets) {
                             var a = {};
-                            a.id = json.tickets[i]["messenger_userid"];
+                            a.mid = json.tickets[i]["messenger_userid"];
+                            a.id = json.tickets[i]["id"];
                             a.name = json.tickets[i]["name"];
                             a.msg = json.tickets[i]["message"];
                             a.url = 'https://www.messenger.com/t/' + json.tickets[i]["messenger_userid"].toString();
-                            
                             this.setState({ tickets: this.state.tickets.concat([a]) });
                         }
                     }
@@ -75,6 +75,22 @@ export class Support extends Component {
         });
     }
 
+    resolveSupport(id) {
+    	let uri = 'tickets/' + id + '/resolve';
+
+        apiService(uri, {
+            method: 'POST'
+        }).then((res) => res.json())
+            .then((json) => {
+                if (json.message === 'success') {
+                    var newTickets = this.state.tickets.filter(function(el) {
+                        return el.id !== id;
+                    });
+                    this.setState({tickets: newTickets})
+                }
+        })
+    }
+
 	render () {
 		return (
 			<div style={{height: '100%'}}>
@@ -86,10 +102,13 @@ export class Support extends Component {
                     <ul className={(this.state.tickets.length > 0) ? "current-tickets" : "hidden"}>
                         {this.state.tickets.map(function(obj, index){
                             return (
-                                <li key={obj.id}>{obj.name}: {obj.msg}</li>
+                                <li key={obj.id}><FontAwesome onClick={() => this.resolveSupport(obj.id)} className="resolve" name="times" /> {obj.name}: {obj.msg}</li>
                             );
                         }, this)}
                     </ul>
+                    <h5 className={(this.state.tickets.length <= 0) ? "current-tickets" : "hidden"}>No support tickets submitted, yet</h5>
+
+
                     </div>
                 </div>
 
