@@ -49,13 +49,15 @@ export class Support extends Component {
                 if (json.message === 'success') {
                     if (json.tickets) {
                         for (var i in json.tickets) {
-                            var a = {};
-                            a.mid = json.tickets[i]["messenger_userid"];
-                            a.id = json.tickets[i]["id"];
-                            a.name = json.tickets[i]["name"];
-                            a.msg = json.tickets[i]["message"];
-                            a.url = 'https://www.messenger.com/t/' + json.tickets[i]["messenger_userid"].toString();
-                            this.setState({ tickets: this.state.tickets.concat([a]) });
+                        	if (!json.tickets[i]["resolved"]) {
+                        		var a = {};
+	                            a.mid = json.tickets[i]["messenger_userid"];
+	                            a.id = json.tickets[i]["id"];
+	                            a.name = json.tickets[i]["name"];
+	                            a.msg = json.tickets[i]["message"];
+	                            a.url = 'https://www.messenger.com/t/' + json.tickets[i]["messenger_userid"].toString();
+	                            this.setState({ tickets: this.state.tickets.concat([a]) });
+                        	}
                         }
                     }
                 }
@@ -109,7 +111,9 @@ export class Support extends Component {
                     <h5 className={(this.state.tickets.length <= 0) ? "current-tickets" : "hidden"}>No support tickets submitted, yet</h5>
 
 
+                    <button onClick={() => this.toggleSupport(0)}>Disable Support</button><br/>
                     </div>
+
                 </div>
 
                 <ul id="navigation">
